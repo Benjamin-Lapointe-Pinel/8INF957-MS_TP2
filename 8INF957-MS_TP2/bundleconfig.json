@@ -1,7 +1,19 @@
 [
     {
-        "outputFileName": "wwwroot/css/site.min.css",
-        "inputFiles": [ "wwwroot/lib/twitter-bootstrap/css/bootstrap.css" ],
+        "outputFileName": "wwwroot/css/site.css",
+        "inputFiles": [
+            "wwwroot/lib/twitter-bootstrap/css/bootstrap.css",
+            "wwwroot/lib/font-awesome/css/all.css"
+        ],
+        "minifiy": { "enabled": true }
+    },
+    {
+        "outputFileName": "wwwroot/js/site.js",
+        "inputFiles": [
+            "wwwroot/lib/jquery/dist/jquery.min.js",
+            "wwwroot/lib/twitter-bootstrap/js/bootstrap.js",
+            "wwwroot/lib/font-awesome/js/all.js"
+        ],
         "minifiy": { "enabled": true }
     }
 ]
