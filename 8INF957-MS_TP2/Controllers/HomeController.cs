@@ -8,7 +8,13 @@ namespace _8INF957_MS_TP2.Controllers
 {
     public class HomeController : Controller
     {
+        public IActionResult Connexion()
+        {
+            return View();
+        }
+
         public IActionResult Informations()
+
         {
             return View();
         }
@@ -26,11 +32,6 @@ namespace _8INF957_MS_TP2.Controllers
         public IActionResult ViewPatient(PatientsList patientsList)
         {
             return View("Patients", patientsList.SelectedPatientId);
-        }
-
-        public IActionResult ConfigurationIA()
-        {
-            return View();
         }
     }
 }
