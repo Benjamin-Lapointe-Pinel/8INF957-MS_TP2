@@ -1,10 +1,9 @@
-﻿
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
 @{
-    ViewData["Title"] = "Informations";
-     Layout = "~/Views/Shared/_Formulaire.cshtml";
-   // Layout = "_Formulaire";
+    Layout = "_Formulaire";
 }
-
 <form>
     <div>
         <label for="Nom">Nom</label>
@@ -34,11 +33,11 @@
              <option value="Montreal">Montreal</option>
          
          </select>
-    </div>
+    </div><br />
     <div>
 
-        <label for="DateDebut">Date début carière</label>
-        <input type="text" value="DateDebut" placeholder="Date"/>
+        <label for="DateEntree">Date d'entrée en fonction</label>
+        <input type="text" value="DateEntree" placeholder="Date"/>
     </div><br />
     
         <div>
@@ -48,11 +47,10 @@
     </div><br />
     
         <div>
-            <button type="submit" value="Modifier" />
+            <button type="submit" value="Créer" >Créer</button>
         </div>
 
          <div>
-            <button type="submit" value="Annuler" />
+            <button type="submit" value="Quitter" >Quitter</button>
         </div>
 </form>
-

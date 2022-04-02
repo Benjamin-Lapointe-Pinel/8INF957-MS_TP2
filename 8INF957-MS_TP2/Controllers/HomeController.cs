@@ -23,6 +23,10 @@ namespace _8INF957_MS_TP2.Controllers
         {
             return View();
         }
+        public IActionResult CreerCompte()
+        {
+            return View();
+        }
 
 
 
