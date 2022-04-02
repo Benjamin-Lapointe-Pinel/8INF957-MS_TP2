@@ -3,7 +3,8 @@
         "outputFileName": "wwwroot/css/site.css",
         "inputFiles": [
             "wwwroot/lib/twitter-bootstrap/css/bootstrap.css",
-            "wwwroot/lib/font-awesome/css/all.css"
+            "wwwroot/lib/font-awesome/css/all.css",
+            "wwwroot/css/stylesheet.css"
         ],
         "minifiy": { "enabled": true }
     },
