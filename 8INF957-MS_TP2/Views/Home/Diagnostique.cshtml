@@ -1,8 +1,17 @@
-﻿
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+@using _8INF957_MS_TP2.Models
 @{
-    ViewData["Title"] = "Diagnostique";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+	ViewData["Title"] = "Diagnostique";
+	Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
+@model PatientsList
 
 <h1>Diagnostique</h1>
 
+<form>
+	@Html.DropDownListFor(m => m.SelectedPatientId, Model.Patients)
+	<input class="btn btn-secondary" type="submit" value="Informations" asp-controller="Home" asp-action="ViewPatient"/>
+	<input class="btn btn-secondary" type="submit" value="Ajouter un patient" asp-controller="Home" asp-action="AddPatient"/>
+</form>
