@@ -11,24 +11,30 @@
 <h1>Diagnostique</h1>
 
 <form>
-	@Html.DropDownListFor(m => m.SelectedPatientId, Model.Patients)
-	<input class="btn btn-secondary" type="submit" value="Informations" asp-controller="Home" asp-action="ViewPatient" />
-	<input class="btn btn-secondary" type="submit" value="Ajouter un patient" asp-controller="Home" asp-action="AddPatient" />
+	<div class="mb-3">
+		@Html.DropDownListFor(m => m.SelectedPatientId, Model.Patients)
+		<input class="btn btn-secondary" type="submit" value="Informations" asp-controller="Home" asp-action="ViewPatient" />
+		<input class="btn btn-secondary" type="submit" value="Ajouter un patient" asp-controller="Home" asp-action="AddPatient" />
+	</div>
 </form>
 <form>
 	<fieldset class="border p-2">
 		<legend class="float-none w-auto">Paramètres</legend>
-		@Html.LabelFor(m => m.SelectedPatientId)
-		@Html.DropDownListFor(m => m.SelectedPatientId, Model.Patients)
-		<br/>
-		@Html.LabelFor(m => m.SelectedPatientId)
-		@Html.DropDownListFor(m => m.SelectedPatientId, Model.Patients)
-		<br/>
-		<label for="oldpeak">Dépression ST induite par l'exercice par rapport au repos</label>
-		<input id="oldpeak" type="number" min="0" max="6.2" step="0.1"/>
-		<br/>
-		<label for="ca">Nombre de gros vaisseaux colorés par fluoroscopie</label>
-		<input id="ca" type="number" min="0" max="3" step="1"/>
-		<br/>
+		<div class="mb-3">
+			@Html.LabelFor(m => m.SelectedPatientId)
+			@Html.DropDownListFor(m => m.SelectedPatientId, Model.Patients)
+		</div>
+		<div class="mb-3">
+			@Html.LabelFor(m => m.SelectedPatientId)
+			@Html.DropDownListFor(m => m.SelectedPatientId, Model.Patients)
+		</div>
+		<div class="mb-3">
+			<label for="oldpeak">Dépression ST induite par l'exercice par rapport au repos</label>
+			<input id="oldpeak" type="number" min="0" max="6.2" step="0.1" />
+		</div>
+		<div class="mb-3">
+			<label for="ca">Nombre de gros vaisseaux colorés par fluoroscopie</label>
+			<input id="ca" type="number" min="0" max="3" step="1" />
+		</div>
 	</fieldset>
 </form>

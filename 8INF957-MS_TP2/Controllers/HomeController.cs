@@ -14,7 +14,6 @@ namespace _8INF957_MS_TP2.Controllers
         }
 
         public IActionResult Informations()
-
         {
             return View();
         }
@@ -27,6 +26,12 @@ namespace _8INF957_MS_TP2.Controllers
                 new Patient("Zaid", "Tidjet", new(1995, 7, 5), GenderEnum.Man, "Rimouski")
             }));
         }
+
+        public IActionResult ConfigurationIA()
+        {
+            return View();
+        }
+
         public IActionResult CreerCompte()
         {
             return View();
