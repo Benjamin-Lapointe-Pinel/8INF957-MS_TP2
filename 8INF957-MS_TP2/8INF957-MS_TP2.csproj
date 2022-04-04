@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
@@ -8,12 +8,28 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="KNN\**" />
+    <Content Remove="KNN\**" />
+    <EmbeddedResource Remove="KNN\**" />
+    <None Remove="KNN\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="BuildBundlerMinifier" Version="3.2.449" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.2" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="wwwroot\js\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="CsvHelper">
+      <HintPath>KNN\CsvHelper.dll</HintPath>
+    </Reference>
+    <Reference Include="KnnLibrary">
+      <HintPath>KNN\KnnLibrary.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
 </Project>
