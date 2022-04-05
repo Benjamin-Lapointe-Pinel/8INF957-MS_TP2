@@ -1,24 +1,24 @@
 ﻿
 @{
     ViewData["Title"] = "Informations";
-     Layout = "~/Views/Shared/_Formulaire.cshtml";
+     Layout = "~/Views/Shared/_Layout.cshtml";
    // Layout = "_Formulaire";
 }
 
-<form>
-    <div>
+<form class="form" style="margin:60px">
+    <div class="form-group">
         <label for="Nom">Nom</label>
-        <input type="text" value="Nom" placeholder="Nom"/>
+        <input type="text" id="Nom" class="form-control" placeholder="Nom"/>
     </div><br />
-      <div>
+      <div class="form-group">
 
         <label for="Prénom">Prénom</label>
-        <input type="text" value="Prénom" placeholder="Prénom"/>
+        <input type="text" id="Prénom" class="form-control" placeholder="Prénom"/>
     </div><br />
-      <div>
+      <div class="form-group">
 
         <label for="DateNaissance">Date Naissance</label>
-        <input type="text" value="DateNaissance" placeholder="Date"/>
+        <input type="text" id="DateNaissance" class="form-control" placeholder="Date"/>
     </div><br />
     <div>
 
@@ -34,25 +34,23 @@
              <option value="Montreal">Montreal</option>
          
          </select>
-    </div>
-    <div>
+    </div><br/>
+    <div class="form-group">
 
         <label for="DateDebut">Date début carière</label>
-        <input type="text" value="DateDebut" placeholder="Date"/>
+        <input type="text" id="DateDebut" class="form-control" placeholder="Date"/>
     </div><br />
     
         <div>
 
         <label for="Email">Adresse email</label>
-        <input type="text" value="Email" placeholder="Email"/>
+        <input type="text" id="Email" class="form-control" placeholder="Email"/>
     </div><br />
     
         <div>
-            <button type="submit" value="Modifier">Modifier<</button>/>
-        </div>
-
-         <div>
-            <button type="submit" value="Annuler" >Annuler</button>
+            <button type="submit" value="Modifier" class="btn btn-secondary" style="background-color :green">Modifier</button>/>
+        
+            <button type="submit" value="Annuler"class="btn btn-secondary" style="background-color :green" >Annuler</button>
         </div>
 </form>
 

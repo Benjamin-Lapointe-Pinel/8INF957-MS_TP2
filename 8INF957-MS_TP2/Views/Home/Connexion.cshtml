@@ -2,6 +2,8 @@
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
+    //@ViewBag.Title = "Connexion";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <!DOCTYPE HTML>
 <HTML>
@@ -22,8 +24,8 @@
          </select><br /><br />
         </div>
 
-<input type="submit" value="Se connecter"/><br /><br />
-<button>
+<button type="submit" class="btn btn-secondary" style="background-color :green"> Se connecter</button><br /><br />
+<button class="btn btn-secondary" style="background-color :green" >
     <a href="~/Home/CreerCompte">Créer un compte</a>
 </button>
      </form>

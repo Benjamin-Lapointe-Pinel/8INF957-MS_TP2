@@ -13,8 +13,8 @@
 <form>
 	<div class="mb-3">
 		@Html.DropDownListFor(m => m.SelectedPatientId, Model.Patients)
-		<input class="btn btn-secondary" type="submit" value="Informations" asp-controller="Home" asp-action="ViewPatient" />
-		<input class="btn btn-secondary" type="submit" value="Ajouter un patient" asp-controller="Home" asp-action="AddPatient" />
+		<input class="btn btn-secondary" type="submit" value="Informations" asp-controller="Home" asp-action="ViewPatient" a href="~/Home/Informations" />
+		<input class="btn btn-secondary" type="submit" value="Ajouter un patient" asp-controller="Home" asp-action="AddPatient" a href="~/Home/AjoutPatient" />
 	</div>
 </form>
 <form>

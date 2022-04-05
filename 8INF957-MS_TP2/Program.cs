@@ -9,7 +9,7 @@ builder.Services.AddMvc(option => option.EnableEndpointRouting = false);
 var app = builder.Build();
 
 app.UseStaticFiles();
-app.UseMvc(routes => routes.MapRoute("Default", "{controller=Home}/{action=ConfigurationIA}"));
+app.UseMvc(routes => routes.MapRoute("Default", "{controller=Home}/{action=CreerCompte}"));
 
 
 app.Run();

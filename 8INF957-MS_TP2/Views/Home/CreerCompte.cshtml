@@ -2,30 +2,41 @@
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
-    Layout = "_Formulaire";
+   // @ViewBag.Title="Créer un compte";
+       
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<form>
-    <div>
-        <label for="Nom">Nom</label>
-        <input type="text" value="Nom" placeholder="Nom"/>
+@*<!Doctype html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta 
+    </head>
+</html>*@
+
+
+<form style="margin: 60px" class="form">
+    <div class="form-group">
+        <label  for="Nom">Nom</label>
+        <input  type="text" id="Nom"  placeholder="Nom" class = " form-control" />
     </div><br />
-      <div>
+      <div class="form-group">
 
         <label for="Prénom">Prénom</label>
-        <input type="text" value="Prénom" placeholder="Prénom"/>
+        <input type="text" id="Prénom" class="form-control" placeholder="Prénom"/>
     </div><br />
-      <div>
+      <div class="form-group">
 
         <label for="DateNaissance">Date Naissance</label>
-        <input type="text" value="DateNaissance" placeholder="Date"/>
+        <input type="text" id="DateNaissance"  class = " form-control"  placeholder="Date"/>
     </div><br />
-    <div>
+    <div class="form-group">
 
         <label for="genre">Je suis</label>
-        <input type="radio" name="genre" value="Homme"> Homme
-        <input type="radio" name="genre" value="femme"> femme
+        <input type="radio" id="genre" value="Homme"> Homme
+        <input type="radio" id="genre" value="femme"> femme
     </div><br />
-    <div>
+    <div class="form-group">
         
              <label for="Ville">Ville</label>
          <select>
@@ -34,23 +45,24 @@
          
          </select>
     </div><br />
-    <div>
+    <div class= "form-group" >
 
         <label for="DateEntree">Date d'entrée en fonction</label>
-        <input type="text" value="DateEntree" placeholder="Date"/>
+        <input type="text" id="DateEntree" class = " form-control" placeholder="Date"/>
     </div><br />
     
-        <div>
+        <div class="form-group">
 
         <label for="Email">Adresse email</label>
-        <input type="text" value="Email" placeholder="Email"/>
+        <input type="text" id="Email" placeholder="Email"  class = "form-control" />
     </div><br />
     
-        <div>
-            <button type="submit" value="Créer" >Créer</button>
-        </div>
+        <div class="mb-3" >
+            <button type="submit" value="Créer" class="btn btn-secondary" style="background-color :green" >Créer</button>
+        
+            <button type="submit" value="Quitter" class="btn btn-secondary" style="background-color :green" >Quitter</button>
+            
+  
 
-         <div>
-            <button type="submit" value="Quitter" >Quitter</button>
         </div>
-</form>
+        
