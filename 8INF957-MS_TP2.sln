@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.1.32228.430
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "8INF957-MS_TP2", "8INF957-MS_TP2\8INF957-MS_TP2.csproj", "{A1E3FD6F-C7C5-4B08-A6C6-ED1B4094B33C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "8INF957-MS_TP2", "8INF957-MS_TP2\8INF957-MS_TP2.csproj", "{A1E3FD6F-C7C5-4B08-A6C6-ED1B4094B33C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RestApi", "RestApi\RestApi.csproj", "{DE0A133D-321D-4F24-899C-9AA0CC6F9FC4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{A1E3FD6F-C7C5-4B08-A6C6-ED1B4094B33C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A1E3FD6F-C7C5-4B08-A6C6-ED1B4094B33C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A1E3FD6F-C7C5-4B08-A6C6-ED1B4094B33C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DE0A133D-321D-4F24-899C-9AA0CC6F9FC4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DE0A133D-321D-4F24-899C-9AA0CC6F9FC4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DE0A133D-321D-4F24-899C-9AA0CC6F9FC4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DE0A133D-321D-4F24-899C-9AA0CC6F9FC4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
