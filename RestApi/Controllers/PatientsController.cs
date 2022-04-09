@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using KnnLibrary;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using RestApi.Models;
 using RestApi.Models.DTO;
@@ -11,10 +12,14 @@ namespace RestApi
     public class PatientsController : ControllerBase
     {
         private readonly TP2Context tp2Context;
+        private readonly KNN knn;
 
         public PatientsController()
         {
             tp2Context = new TP2Context();
+            knn = new KNN();
+            string trainingFile = System.IO.Path.Combine(Directory.GetCurrentDirectory(), "Data_HeartDiseaseDiagnostic", "train.csv");
+            knn.Train(trainingFile, 6, "euclidean");
         }
 
         [HttpGet]
@@ -151,9 +156,9 @@ namespace RestApi
                     CA = diagnosticDTO.CA,
                     OldPeak = diagnosticDTO.OldPeak,
                     Thal = diagnosticDTO.Thal,
-                    Patient = patient
+                    Patient = patient,
                 };
-                diagnostic.Target = false; //TODO KNN
+                diagnostic.Target = knn.Predict(diagnostic);
 
                 tp2Context.Diagnostics.Add(diagnostic);
                 tp2Context.SaveChanges();
@@ -164,7 +169,7 @@ namespace RestApi
                     diagnostic.OldPeak,
                     diagnostic.Thal,
                     diagnostic.Target,
-                    diagnostic.Patient.Id
+                    patientId = diagnostic.Patient.Id
                 });
             }
             catch (Exception)
