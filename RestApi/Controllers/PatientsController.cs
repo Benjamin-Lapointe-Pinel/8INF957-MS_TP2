@@ -104,7 +104,7 @@ namespace RestApi
 
                 tp2Context.Patients.Remove(patient);
                 tp2Context.SaveChanges();
-                return Ok();
+                return NoContent();
             }
             catch (Exception)
             {

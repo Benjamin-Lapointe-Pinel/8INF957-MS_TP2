@@ -11,79 +11,62 @@ using RestApi.Models;
 
 namespace RestApi.Controllers
 {
-    [Produces("application/json")]
     [Route("api/diagnostics")]
     [ApiController]
     public class DiagnosticsController : ControllerBase
     {
         private readonly TP2Context tp2Context;
 
-        public DiagnosticsController(TP2Context context)
+        public DiagnosticsController()
         {
-            tp2Context = context;
+            tp2Context = new TP2Context();
         }
 
-        //// PUT: api/Diagnostics/5
-        //// To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        //[HttpPut("{id}")]
-        //public async Task<IActionResult> PutDiagnosticDB(int id, DiagnosticDB diagnosticDB)
-        //{
-        //    if (id != diagnosticDB.Id)
-        //    {
-        //        return BadRequest();
-        //    }
+        [HttpGet("{id}")]
+        public IActionResult Get(int id)
+        {
+            try
+            {
+                DiagnosticDB diagnostic = tp2Context.Diagnostics.Find(id);
+                if (diagnostic == null)
+                {
+                    return NotFound();
+                }
 
-        //    tp2Context.Entry(diagnosticDB).State = EntityState.Modified;
+                return Ok(new
+                {
+                    diagnostic.CP,
+                    diagnostic.CA,
+                    diagnostic.OldPeak,
+                    diagnostic.Thal,
+                    diagnostic.Target
+                });
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+        }
 
-        //    try
-        //    {
-        //        await tp2Context.SaveChangesAsync();
-        //    }
-        //    catch (DbUpdateConcurrencyException)
-        //    {
-        //        if (!DiagnosticDBExists(id))
-        //        {
-        //            return NotFound();
-        //        }
-        //        else
-        //        {
-        //            throw;
-        //        }
-        //    }
+        [HttpDelete("{id}")]
+        public IActionResult DeleteDiagnosticDB(int id)
+        {
+            try
+            {
+                DiagnosticDB diagnostic = tp2Context.Diagnostics.Find(id);
+                if (diagnostic == null)
+                {
+                    return NotFound();
+                }
 
-        //    return NoContent();
-        //}
-
-        //// POST: api/Diagnostics
-        //// To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        //[HttpPost]
-        //public async Task<ActionResult<DiagnosticDB>> PostDiagnosticDB(DiagnosticDB diagnosticDB)
-        //{
-        //    tp2Context.Diagnostics.Add(diagnosticDB);
-        //    await tp2Context.SaveChangesAsync();
-
-        //    return CreatedAtAction("GetDiagnosticDB", new { id = diagnosticDB.Id }, diagnosticDB);
-        //}
-
-        //// DELETE: api/Diagnostics/5
-        //[HttpDelete("{id}")]
-        //public async Task<IActionResult> DeleteDiagnosticDB(int id)
-        //{
-        //    var diagnosticDB = await tp2Context.Diagnostics.FindAsync(id);
-        //    if (diagnosticDB == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    tp2Context.Diagnostics.Remove(diagnosticDB);
-        //    await tp2Context.SaveChangesAsync();
-
-        //    return NoContent();
-        //}
-
-        //private bool DiagnosticDBExists(int id)
-        //{
-        //    return tp2Context.Diagnostics.Any(e => e.Id == id);
-        //}
+                tp2Context.Diagnostics.Remove(diagnostic);
+                tp2Context.SaveChanges();
+                return NoContent();
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+        }
     }
 }
