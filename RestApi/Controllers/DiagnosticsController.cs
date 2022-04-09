@@ -27,7 +27,7 @@ namespace RestApi.Controllers
         {
             try
             {
-                DiagnosticDB diagnostic = tp2Context.Diagnostics.Find(id);
+                DiagnosticDB diagnostic = tp2Context.Diagnostics.Include("Patient").SingleOrDefault(x => x.Id == id);
                 if (diagnostic == null)
                 {
                     return NotFound();
@@ -39,7 +39,8 @@ namespace RestApi.Controllers
                     diagnostic.CA,
                     diagnostic.OldPeak,
                     diagnostic.Thal,
-                    diagnostic.Target
+                    diagnostic.Target,
+                    patientId = diagnostic.Patient.Id
                 });
             }
             catch (Exception)

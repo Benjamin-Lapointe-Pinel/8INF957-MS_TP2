@@ -163,7 +163,8 @@ namespace RestApi
                     diagnostic.CA,
                     diagnostic.OldPeak,
                     diagnostic.Thal,
-                    diagnostic.Target
+                    diagnostic.Target,
+                    diagnostic.Patient.Id
                 });
             }
             catch (Exception)
