@@ -1,8 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using KnnLibrary;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using RestApi.Models;
 using RestApi.Models.DTO;
-
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace RestApi
 {
@@ -11,11 +11,15 @@ namespace RestApi
     [ApiController]
     public class PatientsController : ControllerBase
     {
-        private TP2Context tp2Context;
+        private readonly TP2Context tp2Context;
+        private readonly KNN knn;
 
         public PatientsController()
         {
             tp2Context = new TP2Context();
+            knn = new KNN();
+            string trainingFile = System.IO.Path.Combine(Directory.GetCurrentDirectory(), "Data_HeartDiseaseDiagnostic", "train.csv");
+            knn.Train(trainingFile, 6, "euclidean");
         }
 
         [HttpGet]
@@ -105,7 +109,68 @@ namespace RestApi
 
                 tp2Context.Patients.Remove(patient);
                 tp2Context.SaveChanges();
-                return Ok();
+                return NoContent();
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+        }
+
+        [HttpGet("{id}/diagnostics")]
+        public IActionResult GetDiagnostics(int id)
+        {
+            try
+            {
+                Patient? patient = tp2Context.Patients.Include("DiagnosticDBs").SingleOrDefault(x => x.Id == id);
+
+                if (patient == null)
+                {
+                    return NotFound();
+                }
+
+                return Ok(patient.DiagnosticDBs?.Select(d => new { d.CP, d.CA, d.OldPeak, d.Thal, d.Target }));
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+
+        }
+
+        [HttpPost("{id}/diagnose")]
+        public IActionResult Diagnose(int id, [FromBody] DiagnosticDTO diagnosticDTO)
+        {
+            try
+            {
+                Patient? patient = tp2Context.Patients.Find(id);
+
+                if (patient == null)
+                {
+                    return NotFound();
+                }
+
+                DiagnosticDB diagnostic = new()
+                {
+                    CP = diagnosticDTO.CP,
+                    CA = diagnosticDTO.CA,
+                    OldPeak = diagnosticDTO.OldPeak,
+                    Thal = diagnosticDTO.Thal,
+                    Patient = patient,
+                };
+                diagnostic.Target = knn.Predict(diagnostic);
+
+                tp2Context.Diagnostics.Add(diagnostic);
+                tp2Context.SaveChanges();
+                return Ok(new
+                {
+                    diagnostic.CP,
+                    diagnostic.CA,
+                    diagnostic.OldPeak,
+                    diagnostic.Thal,
+                    diagnostic.Target,
+                    patientId = diagnostic.Patient.Id
+                });
             }
             catch (Exception)
             {

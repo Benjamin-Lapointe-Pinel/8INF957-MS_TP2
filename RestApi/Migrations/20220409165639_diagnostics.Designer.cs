@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RestApi;
 
@@ -10,9 +11,10 @@ using RestApi;
 namespace RestApi.Migrations
 {
     [DbContext(typeof(TP2Context))]
-    partial class TP2ContextModelSnapshot : ModelSnapshot
+    [Migration("20220409165639_diagnostics")]
+    partial class diagnostics
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -47,7 +49,7 @@ namespace RestApi.Migrations
 
                     b.HasIndex("PatientId");
 
-                    b.ToTable("Diagnostics", (string)null);
+                    b.ToTable("Diagnostics");
                 });
 
             modelBuilder.Entity("RestApi.Models.Doctor", b =>
@@ -79,7 +81,7 @@ namespace RestApi.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Doctors", (string)null);
+                    b.ToTable("Doctors");
 
                     b.HasData(
                         new
@@ -129,7 +131,7 @@ namespace RestApi.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Patients", (string)null);
+                    b.ToTable("Patients");
 
                     b.HasData(
                         new
