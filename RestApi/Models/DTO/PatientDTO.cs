@@ -9,12 +9,9 @@ namespace RestApi.Models.DTO
 {
     public class PatientDTO : PersonDTO
     {
-        public bool Diagnostic { get; set; } = false;
-
-        public PatientDTO(string firstName, string lastName, DateTime birthdate, GenderEnum gender, string city, bool diagnostic = false)
+        public PatientDTO(string firstName, string lastName, DateTime birthdate, GenderEnum gender, string city)
             : base(firstName, lastName, birthdate, gender, city)
         {
-            Diagnostic = diagnostic;
         }
     }
 }
