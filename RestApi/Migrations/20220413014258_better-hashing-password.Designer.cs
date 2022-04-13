@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RestApi;
 
@@ -10,9 +11,10 @@ using RestApi;
 namespace RestApi.Migrations
 {
     [DbContext(typeof(TP2Context))]
-    partial class TP2ContextModelSnapshot : ModelSnapshot
+    [Migration("20220413014258_better-hashing-password")]
+    partial class betterhashingpassword
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -100,7 +102,7 @@ namespace RestApi.Migrations
                             FirstName = "Benjamin",
                             Gender = 0,
                             LastName = "Lapointe-Pinel",
-                            Password = "AQAAAAEAACcQAAAAEFbiw0PYmG4kIhkaH26Iia+dkuCEKOUgMvZ1g4c12R1ojTHNYF25n4QIrlmNh+LcyA==",
+                            Password = "AQAAAAEAACcQAAAAEA+9HqP7QK9uuEPywM1UA2IAPBC0hgswE4FhNd8yruV4usUzDJS0+73NPOMo3oA76Q==",
                             Username = "blp"
                         },
                         new
@@ -113,7 +115,7 @@ namespace RestApi.Migrations
                             FirstName = "Zaid",
                             Gender = 0,
                             LastName = "Tidjet",
-                            Password = "AQAAAAEAACcQAAAAEAFfPaEOY/C/7zYmYfRQJizMxXil3fPEn+TJFQO6JPDU4w6iHyBEpqIeREfLa94pvg==",
+                            Password = "AQAAAAEAACcQAAAAEPoTwaow/vhHeCkXZ9WQgdYWQMUNZPzv0Njr5Si6eiMIr0GH+PYUJTQRS5dUsUWgtA==",
                             Username = "zt"
                         });
                 });
