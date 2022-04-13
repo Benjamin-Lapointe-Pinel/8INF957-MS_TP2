@@ -5,50 +5,58 @@
    // Layout = "_Formulaire";
 }
 
-<form class="form" style="margin:60px">
+<form class="form" asp-action="Upadate" style="margin:60px">
     <div class="form-group">
-        <label for="Nom">Nom</label>
-        <input type="text" id="Nom" class="form-control" placeholder="Nom"/>
+        <label for="Nom" asp-for="lastName">Nom</label>
+        <input type="text" asp-for="lastName" id="Nom" class="form-control" placeholder="Nom"/>
+        <span asp-for-validation="lastName" class="text-danger"> </span>
+
     </div><br />
       <div class="form-group">
 
-        <label for="Prénom">Prénom</label>
-        <input type="text" id="Prénom" class="form-control" placeholder="Prénom"/>
+        <label for="Prénom" asp-for="FirstName">Prénom</label>
+        <input type="text" asp-for="FirstName" id="Prénom" class="form-control" placeholder="Prénom"/>
+          <span asp-for-validation="FirstName" class="text-danger"> </span>
     </div><br />
       <div class="form-group">
 
-        <label for="DateNaissance">Date Naissance</label>
-        <input type="text" id="DateNaissance" class="form-control" placeholder="Date"/>
+        <label for="DateNaissance" asp-for="birthdate">Date Naissance</label>
+        <input type="text" asp-for="birthdate" id="DateNaissance" class="form-control" placeholder="Date"/>
+         <span asp-validation-for="birthdate" class="text-danger" ></span>
     </div><br />
     <div>
 
-        <label for="genre">Je suis</label>
-        <input type="radio" name="genre" value="Homme"> Homme
-        <input type="radio" name="genre" value="femme"> femme
+        <label for="genre" asp-for="GenderEnum">Je suis</label>
+        <input type="radio" asp-for="GenderEnum" name="genre" value="Homme"> Homme
+        <input type="radio" asp-for="GenderEnum" name="genre" value="femme"> femme
+        <span asp-validation-for="GenderEnum" class="text-danger" ></span>
     </div><br />
     <div>
         
-             <label for="Ville">Ville</label>
+             <label for="Ville" asp-for="city">Ville</label>
          <select>
-            <option value="Rimouski">Rimouski</option>
-             <option value="Montreal">Montreal</option>
+            <option value="Rimouski" asp-for="city">Rimouski</option>
+             <option value="Montreal" asp-for="city">Montreal</option>
+              <span asp-validation-for="city"  ></span>
          
          </select>
     </div><br/>
     <div class="form-group">
 
-        <label for="DateDebut">Date début carière</label>
-        <input type="text" id="DateDebut" class="form-control" placeholder="Date"/>
+        <label for="DateDebut" asp-for="DateEntryOffice">Date début carière</label>
+        <input type="text" asp-for="DateEntryOffice" id="DateDebut" class="form-control" placeholder="Date"/>
+        <span asp-validation-for="DateEntryOffice"></span>
     </div><br />
     
         <div>
 
-        <label for="Email">Adresse email</label>
-        <input type="text" id="Email" class="form-control" placeholder="Email"/>
+        <label for="Email" asp-for="email" >Adresse email</label>
+        <input type="text" asp-for="email" id="Email" class="form-control" placeholder="Email"/>
+        <span asp-validation-for="email"  ></span>
     </div><br />
     
         <div>
-            <button type="submit" value="Modifier" class="btn btn-secondary" style="background-color :green">Modifier</button>/>
+            <button type="submit" value="Modifier" class="btn btn-secondary" style="background-color :green">Modifier</button>
         
             <button type="submit" value="Annuler"class="btn btn-secondary" style="background-color :green" >Annuler</button>
         </div>

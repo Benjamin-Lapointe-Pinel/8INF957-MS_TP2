@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -20,10 +21,15 @@ namespace _8INF957_MS_TP2
         }
 
         public int Id { get; set; }
+        [Required(ErrorMessage="Champs Requis!")]
         public string FirstName { get; set; }
+        [Required(ErrorMessage = "Champs Requis!")]
         public string LastName { get; set; }
+        [Required(ErrorMessage = "Champs Requis!")]
         public DateOnly Birthdate { get; set; }
+        [Required(ErrorMessage = "Champs Requis!")]
         public GenderEnum Gender { get; set; }
+        [Required(ErrorMessage = "Champs Requis!")]
         public string City { get; set; }
 
         public virtual bool IsValid => !string.IsNullOrWhiteSpace(FirstName) && !string.IsNullOrWhiteSpace(LastName) && !string.IsNullOrWhiteSpace(City);

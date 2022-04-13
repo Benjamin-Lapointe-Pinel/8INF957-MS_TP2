@@ -5,39 +5,45 @@
    // @ViewBag.Title="Ajouter un patient";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<form style="margin : 60px" class="form">
-    <div class="form-group">
-        <label for="Nom">Nom</label>
-        <input type="text" id="Nom" class="form-control" placeholder="Nom"/>
+<form style="margin : 60px" class="form" asp-action="Add">
+    <div class="form-group" >
+        <label for="Nom" asp-for="FirstName">Nom</label>
+        <input type="text" asp-for="FirstName" id="Nom" class="form-control" placeholder="Nom"/>
+         <span asp-validation-for="FirstName" class="text-danger" ></span>
     </div><br />
       <div class="form-group">
 
-        <label for="Prénom">Prénom</label>
-        <input type="text" id="Prénom" class="form-control" placeholder="Prénom"/>
+        <label for="Prénom" asp-for="LastName">Prénom</label>
+        <input type="text" asp-for="LastName" id="Prénom" class="form-control" placeholder="Prénom"/>
+         <span asp-validation-for="LastName" class="text-danger" ></span>
     </div><br />
     <div class="form-group" >
 
-        <label for="DateNaissance">Date Naissance</label>
-        <input type="text" id="DateNaissance" class="form-control"  placeholder="Date"/>
+        <label for="DateNaissance" asp-for="Birthdate">Date Naissance</label>
+        <input type="text" asp-for="Birthdate" id="DateNaissance" class="form-control"  placeholder="Date"/>
+         <span asp-validation-for="Birthdate" class="text-danger" ></span>
     </div><br />
     <div>
 
-        <label for="genre">Je suis</label>
-        <input type="radio" name="genre" id="Homme"> Homme
-        <input type="radio" name="genre" id="femme"> femme
+        <label for="genre" asp-for="Gender">Je suis</label>
+        <input type="radio" asp-for="Gender" name="genre" id="Homme"> Homme
+        <input type="radio" asp-for="Gender" name="genre" id="femme"> femme
+         <span asp-validation-for="Gender" class="text-danger" ></span>
     </div><br />
      <div>
         
-             <label for="Ville">Ville</label>
+             <label for="Ville" asp-for="city">Ville</label>
          <select>
-            <option value="Rimouski">Rimouski</option>
-             <option value="Montreal">Montreal</option>
+            <option value="Rimouski" asp-for="city">Rimouski</option>
+             <option value="Montreal" asp-for="city">Montreal</option>
+             <span asp-validation-for="city" class="text-danger" ></span>
          
          </select>
     </div>
     <div>
-        <label for="Dernier_Diagnostique">Dernier diagnostique</label>
-        <input type="text" value="Dernier_Diagnostique" placeholder="Présence/abscence de maladie"/>
+        <label for="Dernier_Diagnostique" asp-for="Diagnose">Dernier diagnostique</label>
+        <input type="text" asp-for="Diagnose" value="Dernier_Diagnostique" placeholder="Présence/abscence de maladie"/>
+         <span asp-validation-for="Diagnose" class="text-danger" ></span>
     </div><br />
         <div class="mb-3">
             <button type="submit" value="Ajouter" class="btn btn-secondary" style="background-color :green">Ajouter</button>

@@ -53,16 +53,18 @@ namespace RestApi
             try
             {
                 Patient patient = new()
-                {
+                {   Id=PatientDTO.Id,
                     FirstName = patientDto.FirstName,
                     LastName = patientDto.LastName,
                     Birthdate = patientDto.Birthdate,
                     Gender = patientDto.Gender,
                     City = patientDto.City
                 };
+
                 tp2Context.Patients.Add(patient);
                 tp2Context.SaveChanges();
                 return CreatedAtAction(nameof(Get), new { id = patient.Id }, patient);
+              
             }
             catch (Exception)
             {

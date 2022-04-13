@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace _8INF957_MS_TP2.Models
 {
@@ -6,29 +7,32 @@ namespace _8INF957_MS_TP2.Models
     
         public class Doctor : Person 
         {
-        public Doctor(string firstName, string lastName, DateOnly birthdate, GenderEnum gender, string city) : base(firstName, lastName, birthdate, gender, city)
+        public Doctor(string firstName, string lastName, DateOnly birthdate, DateOnly DateEn , GenderEnum gender, string city)
+            : base( firstName, lastName, birthdate, gender, city)
         {
         }
-
+        [Required(ErrorMessage="Chapms requis !")]
         [Column(TypeName = "date")]
+        //[Required(ErrorMessage = "Chapms requis !")]
+        public  DateOnly birthdate { get; set; }
+        [Required(ErrorMessage = "Chapms requis !")]
         public DateTime DateEntryOffice { get; set; }
-        public string? lastName { get; set; }
+        [Required(ErrorMessage = "Chapms requis !")]
+        public string? LastName { get; set; }
+        [Required(ErrorMessage = "Chapms requis !")]
         public string? FirstName { get; set; }
+        [Required(ErrorMessage = "Chapms requis !")]
         public bool? GenderEnum { get; set; }
-        public string? ville { get; set; }
-
-        public string? Email { get; set; }
+        [Required(ErrorMessage = "Chapms requis !")]
+        public string? city { get; set; }
+        [Required(ErrorMessage = "Chapms requis !")]
+        public string? email { get; set; }
         
 
         public ICollection<Patient> Patients{ get; set; }
 
 
-        static void AddDoctor(Models.Doctor doctor)
-        {
-            //TP2Context tP2Context = new TP2Context();
-            //TP2Context.Doctors.Add(doctor);
-            //TP2Context.saveChanges();
-        }
+      
   
     }
      

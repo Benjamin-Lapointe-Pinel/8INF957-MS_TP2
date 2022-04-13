@@ -1,64 +1,66 @@
 ﻿@*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @{
-   // @ViewBag.Title="Créer un compte";
+   // @ViewBag.Title = "Créer un compte";
        
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-@*<!Doctype html>
-<html>
-    <head>
-        <meta charset="utf-8" />
-        <meta 
-    </head>
-</html>*@
+@model _8INF957_MS_TP2.Models.Doctor
 
-
-<form style="margin: 60px" class="form" asp-action="Cr">
+<form style="margin: 60px" class="form" asp-action="Add">
     <div class="form-group">
-        <label  for="Nom">Nom</label>
-        <input  type="text" id="Nom"  placeholder="Nom" class = " form-control" />
+        <label  for="Nom" asp-for="LastName">Nom</label>
+        <input  type="text" asp-for="LastName" id="lastName"  placeholder="Nom" class = " form-control" />
+        <span asp-validation-for="LastName" class="text-danger" ></span>
     </div><br />
       <div class="form-group">
 
-        <label for="Prénom">Prénom</label>
-        <input type="text" id="Prénom" class="form-control" placeholder="Prénom"/>
+        <label for="Prénom" asp-for="FirstName">Prénom</label>
+        <input type="text" asp-for="FirstName" id="Prénom" class="form-control" placeholder="Prénom"/>
+        <span asp-validation-for="FirstName" class="text-danger" ></span>
     </div><br />
       <div class="form-group">
 
-        <label for="DateNaissance">Date Naissance</label>
-        <input type="text" id="DateNaissance"  class = " form-control"  placeholder="Date"/>
+        <label for="birthdate" asp-for="birthdate">Date Naissance</label>
+        <input type="text" asp-for="birthdate" id="birthdate"  class = " form-control"  placeholder="Date"/>
+        <span asp-validation-for="birthdate" class="text-danger" ></span>
     </div><br />
     <div class="form-group">
 
-        <label for="genre">Je suis</label>
-        <input type="radio" id="genre" value="Homme"> Homme
-        <input type="radio" id="genre" value="femme"> femme
+        <label for="gender" asp-for="GenderEnum">Je suis</label>
+        <input type="radio" asp-for="GenderEnum" id="GenderEnum" value="Homme"> Homme
+        <input type="radio" asp-for="GenderEnum" id="GenderEnum" value="femme"> femme
+         <span asp-validation-for="GenderEnum"  ></span>
+        
     </div><br />
     <div class="form-group">
         
-             <label for="Ville">Ville</label>
+             <label for="city" asp-for="city">Ville</label>
          <select>
-            <option value="Rimouski">Rimouski</option>
-             <option value="Montreal">Montreal</option>
+            <option value="Rimouski" asp-for="city">Rimouski</option>
+             <option value="Montreal"asp-for="city" >Montreal</option>
+             <span asp-validation-for="city"  ></span>
          
          </select>
     </div><br />
     <div class= "form-group" >
 
-        <label for="DateEntree">Date d'entrée en fonction</label>
-        <input type="text" id="DateEntree" class = " form-control" placeholder="Date"/>
+        <label for="DateEntree" asp-for="DateEntryOffice" >Date d'entrée en fonction</label>
+        <input type="text" asp-for="DateEntryOffice" id="DateEntryOffice" class = " form-control" placeholder="Date"/>
+         <span asp-validation-for="DateEntryOffice"></span>
     </div><br />
     
         <div class="form-group">
 
-        <label for="Email">Adresse email</label>
-        <input type="text" id="Email" placeholder="Email"  class = "form-control" />
+        <label for="Email" asp-for="email" >Adresse email</label>
+        <input type="text" asp-for="email" id="Email" placeholder="Email"  class = "form-control" />
+        <span asp-validation-for="email"  ></span>
     </div><br />
     
         <div class="mb-3" >
-            <button type="submit" value="Créer" class="btn btn-secondary" style="background-color :green" >Créer</button>
+            <a type="submit" value="Créer" class="btn btn-secondary" style="background-color :green" href="~/Home/Résultat">Créer</a>
         
             <button type="submit" value="Quitter" class="btn btn-secondary" style="background-color :green" >Quitter</button>
             
@@ -66,3 +68,4 @@
 
         </div>
         
+</form>
