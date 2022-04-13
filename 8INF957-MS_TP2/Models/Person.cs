@@ -10,6 +10,9 @@ namespace _8INF957_MS_TP2
 {
     public class Person
     {
+        private bool v;
+        private bool diagnostic;
+
         public enum GenderEnum
         {
             Man,
@@ -25,7 +28,7 @@ namespace _8INF957_MS_TP2
 
         public virtual bool IsValid => !string.IsNullOrWhiteSpace(FirstName) && !string.IsNullOrWhiteSpace(LastName) && !string.IsNullOrWhiteSpace(City);
 
-        public Person()
+        public Person(int id)
         {
             FirstName = "";
             LastName = "";
@@ -40,6 +43,12 @@ namespace _8INF957_MS_TP2
             Birthdate = birthdate;
             Gender = gender;
             City = city;
+        }
+
+        public Person(bool v, bool diagnostic)
+        {
+            this.v = v;
+            this.diagnostic = diagnostic;
         }
 
         public override string ToString()
