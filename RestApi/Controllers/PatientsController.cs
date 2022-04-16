@@ -1,11 +1,14 @@
 ﻿using KnnLibrary;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Net.Http.Headers;
 using RestApi.Models;
 using RestApi.Models.DTO;
 
 namespace RestApi
 {
+    [Authorize]
     [Produces("application/json")]
     [Route("api/patients")]
     [ApiController]
@@ -18,13 +21,14 @@ namespace RestApi
         {
             tp2Context = new TP2Context();
             knn = new KNN();
-            string trainingFile = System.IO.Path.Combine(Directory.GetCurrentDirectory(), "Data_HeartDiseaseDiagnostic", "train.csv");
+            string trainingFile = Path.Combine(Directory.GetCurrentDirectory(), "Data_HeartDiseaseDiagnostic", "train.csv");
             knn.Train(trainingFile, 6, "euclidean");
         }
 
         [HttpGet]
         public IActionResult Get()
         {
+            string doctorId = HttpContext.User.Claims.Single(c => c.Type == "DoctorId").Value;
             return Ok(tp2Context.Patients);
         }
 
@@ -53,7 +57,7 @@ namespace RestApi
             try
             {
                 Patient patient = new()
-                {   Id=PatientDTO.Id,
+                {
                     FirstName = patientDto.FirstName,
                     LastName = patientDto.LastName,
                     Birthdate = patientDto.Birthdate,
