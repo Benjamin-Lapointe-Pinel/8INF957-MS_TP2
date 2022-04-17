@@ -10,7 +10,7 @@
 
 <h1>Diagnostique</h1>
 
-<form>
+<form asp-action="Diagnose">
 	<div class="mb-3">
 		@Html.DropDownListFor(m => m.SelectedPatientId, Model.Patients)
 		<input class="btn btn-secondary" type="submit" value="Informations" asp-controller="Home" asp-action="ViewPatient" a href="~/Home/Informations" />

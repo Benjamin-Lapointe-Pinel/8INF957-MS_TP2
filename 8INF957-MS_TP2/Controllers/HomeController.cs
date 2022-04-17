@@ -3,8 +3,7 @@ using _8INF957_MS_TP2.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using static _8INF957_MS_TP2.Person;
-using static _8INF957_MS_TP2.Patient;
-using _8INF957_MS_TP2.Models.Patient;
+
 
 
 namespace _8INF957_MS_TP2.Controllers
@@ -38,8 +37,8 @@ namespace _8INF957_MS_TP2.Controllers
         {
             return View(new PatientsList(new List<Patient>()
             {
-                new Patient("Benjamin", "Lapointe-Pinel", new(1995, 11, 13), GenderEnum.Man, "Rimouski"),
-                new Patient("Zaid", "Tidjet", new(1995, 7, 5), GenderEnum.Man, "Rimouski")
+                new Patient("Benjamin", "Lapointe-Pinel", new(1995, 11, 13), GenderEnum.Man, "Rimouski","présent"),
+                new Patient("Zaid", "Tidjet", new(1995, 7, 5), GenderEnum.Man, "Rimouski","présent")
             }));
         }
 
@@ -100,14 +99,25 @@ namespace _8INF957_MS_TP2.Controllers
 
             return View(patient);
         }
+        //suprimer un patient
         [HttpDelete]
         public  IActionResult AjoutPatient(int Id)
         {
             TP2Context db = new TP2Context();
-            Models.PatientsList.patient = db.Patients.Find(Id);
-            db.Patients.Remove(PatientList);
+            Models.Patient patient = db.Patients.Find(Id);
+            db.Patients.Remove(patient);
             db.SaveChanges();
-            return View(patientList);
+            return View(patient);
+
+        }
+        // supprimer un diagnostique  d'un patient
+        public IActionResult AjoutPatient(string Firstname)
+        {
+            TP2Context db = new TP2Context();
+            Models.Patient patient = db.Patients.Find(Firstname);
+            db.Patients.Remove(patient);
+            db.SaveChanges();
+            return View(patient);
 
         }
         public IActionResult Résult(Models.Doctor doctor)

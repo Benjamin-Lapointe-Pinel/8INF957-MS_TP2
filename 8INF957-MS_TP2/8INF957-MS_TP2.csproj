@@ -33,4 +33,8 @@
     <Folder Include="wwwroot\js\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\RestApi\RestApi.csproj" />
+  </ItemGroup>
+
 </Project>

@@ -1,10 +1,12 @@
 ﻿@*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @{
    // @ViewBag.Title="Ajouter un patient";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+@model _8INF957_MS_TP2.Models.Patient
 <form style="margin : 60px" class="form" asp-action="Add">
     <div class="form-group" >
         <label for="Nom" asp-for="FirstName">Nom</label>
@@ -26,16 +28,16 @@
     <div>
 
         <label for="genre" asp-for="Gender">Je suis</label>
-        <input type="radio" asp-for="Gender" name="genre" id="Homme"> Homme
-        <input type="radio" asp-for="Gender" name="genre" id="femme"> femme
+        <input type="radio" asp-for="Gender" name="genre" id="Homme" value="Homme"> Homme
+        <input type="radio" asp-for="Gender" name="genre" id="femme" value="Femme"> femme
          <span asp-validation-for="Gender" class="text-danger" ></span>
     </div><br />
      <div>
         
              <label for="Ville" asp-for="city">Ville</label>
          <select>
-            <option value="Rimouski" asp-for="city">Rimouski</option>
-             <option value="Montreal" asp-for="city">Montreal</option>
+            <option value="Rimouski"  asp-for="city">Rimouski</option>
+             <option value="Montreal"  asp-for="city">Montreal</option>
              <span asp-validation-for="city" class="text-danger" ></span>
          
          </select>
