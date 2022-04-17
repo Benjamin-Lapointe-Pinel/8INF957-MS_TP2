@@ -47,7 +47,7 @@
                 Height="41"
                 Width="375"
                 IsEnabled="{Binding IsEnabled}"
-                SelectedDate="{Binding Patient.Birthdate, Converter={StaticResource DateConverter}, UpdateSourceTrigger=PropertyChanged }"/>
+                SelectedDate="{Binding Patient.Birthdate, UpdateSourceTrigger=PropertyChanged }"/>
         </StackPanel>
 
 

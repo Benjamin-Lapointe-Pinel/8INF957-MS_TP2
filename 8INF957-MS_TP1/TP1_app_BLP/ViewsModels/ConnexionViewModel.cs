@@ -19,39 +19,30 @@ namespace TP1_app_BLP.ViewsModels
 {
     public class ConnexionViewModel
     {
-        private RestApiClient restApiClient;
         public ICommand Connect { get; private set; }
-        public ICommand CreateAccount { get; private set; }
         public AuthenticationRequest AuthenticationRequest { get; private set; }
 
         public ConnexionViewModel()
         {
-            restApiClient = new();
-            AuthenticationRequest = new();
+            AuthenticationRequest = new()
+            {
+                UserName = "blp",
+                Password = "abc123"
+            };
 
             Connect = new RelayCommand<Window>(window =>
             {
-                Doctor? doctor = restApiClient.Login(AuthenticationRequest);
-                if (doctor == null)
+                if (!RestApi.Client.Login(AuthenticationRequest))
                 {
                     MessageBox.Show("Informations de connexion incorrectes", "Avertissement", MessageBoxButton.OK, MessageBoxImage.Warning);
                     return;
                 }
 
-                var accueil = new Accueil(doctor);
+                var accueil = new Accueil();
                 accueil.Show();
                 window.Close();
             },
             window => AuthenticationRequest.IsValid);
-            CreateAccount = new RelayCommand(() =>
-            {
-                var createAccount = new CreateAccount();
-                bool? result = createAccount.ShowDialog();
-                if (result.HasValue && result.Value)
-                {
-                    //Doctors.Add(createAccount.doctorEditorViewModel.Doctor);
-                }
-            });
         }
     }
 }

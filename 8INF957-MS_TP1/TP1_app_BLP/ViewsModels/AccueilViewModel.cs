@@ -12,6 +12,7 @@ using GalaSoft.MvvmLight.CommandWpf;
 using Microsoft.Win32;
 using TP01_HeartDiseaseDiagnostic;
 using TP1_app_BLP.Model;
+using TP1_app_BLP.Services;
 using TP1_app_BLP.Views;
 
 namespace TP1_app_BLP.ViewsModels
@@ -45,7 +46,6 @@ namespace TP1_app_BLP.ViewsModels
         public Patient SelectedPatient { get; set; }
         private string trainFile;
         private string testFile;
-        private Doctor backupDoctor;
         private IKNN knn;
         private bool diagnoseReady => knn != null &&
             OldPeak >= 0 && OldPeak <= 6.2 &&
@@ -93,20 +93,14 @@ namespace TP1_app_BLP.ViewsModels
         public ICommand ComptePatient { get; private set; }
         public ICommand Diagnose { get; private set; }
 
-        public AccueilViewModel(Doctor doctor) : base(doctor)
+        public AccueilViewModel() : base(null)
         {
-            backupDoctor = new Doctor(doctor);
-
-            Patients = new()
-            {
-                new("Benjamin", "Lapointe", new(1995, 11, 13), Person.GenderEnum.Man, "Rimouski"),
-                new("Mamadou", "Diallo", new(1994, 09, 3), Person.GenderEnum.Man, "Lévis"),
-                new("Bhas", "Fatemeh", new(1997, 09, 3), Person.GenderEnum.Woman, "Québec")
-            };
+            Doctor = RestApi.Client.GetDoctor();
+            Patients = new ObservableCollection<Patient>(RestApi.Client.GetPatients());
             SelectedPatient = Patients[0];
 
-            ModifyDoctor = new RelayCommand(() => backupDoctor = new Doctor(Doctor), () => Doctor.IsValid);
-            CancelDoctor = new RelayCommand(() => Doctor = new Doctor(backupDoctor));
+            ModifyDoctor = new RelayCommand(() => Doctor = RestApi.Client.PutDoctor(Doctor), () => Doctor.IsValid);
+            CancelDoctor = new RelayCommand(() => Doctor = RestApi.Client.GetDoctor());
             TrainCommand = new RelayCommand(() =>
             {
                 OpenFileDialog openFileDialog = new OpenFileDialog();
@@ -138,7 +132,8 @@ namespace TP1_app_BLP.ViewsModels
                 bool? result = comptePatient.ShowDialog();
                 if (result.HasValue && result.Value)
                 {
-                    Patients.Add(comptePatient.patientViewModel.Patient);
+                    Patient patient = comptePatient.patientViewModel.Patient;
+                    Patients.Add(RestApi.Client.PostPatient(patient));
                 }
             });
             InfoPatient = new RelayCommand(() =>

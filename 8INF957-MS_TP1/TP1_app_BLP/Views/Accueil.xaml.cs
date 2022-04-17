@@ -20,9 +20,9 @@ namespace TP1_app_BLP.Views
     public partial class Accueil : Window
     {
         private AccueilViewModel accueilViewModel;
-        public Accueil(Doctor doctor)
+        public Accueil()
         {
-            accueilViewModel = new AccueilViewModel(doctor);
+            accueilViewModel = new AccueilViewModel();
             DataContext = accueilViewModel;
             InitializeComponent();
         }
