@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using RestApi;
 using RestApi.Models;
+using System.Data.SqlClient;
+using Microsoft.AspNetCore.Authorization;
 
 namespace _8INF957_MS_TP2.Controllers
 {
@@ -114,6 +116,14 @@ namespace _8INF957_MS_TP2.Controllers
             db.SaveChanges();
             return View(patient);
 
-        }       
+        }
+       // [Authorize(Roles = "Admin, User")]
+        public IActionResult login()
+        {
+            return View();
+        }
+        
+      
+       
     }
 }
