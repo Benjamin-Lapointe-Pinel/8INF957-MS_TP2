@@ -1,0 +1,81 @@
+﻿<UserControl x:Class="TP1_app_BLP.Views.UserControls.DiagnosticUserControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:TP1_app_BLP.Views.UserControls"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+
+        <Grid.RowDefinitions >
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" Grid.Column="0" Grid.Row="0" Width="780">
+            <ComboBox Width="248" FontSize="20" Height="40" Margin="40 0 10 0"
+                ItemsSource="{Binding Patients}"
+                SelectedItem="{Binding SelectedPatient}" />
+            <Button Content="Informations" Command="{Binding InfoPatient}" 
+                   CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}}"
+                   Margin="10 0 0 0" FontSize="20" Height="40" Width="220"/>
+            <Button Content="Ajouter un patient" Command="{Binding ComptePatient}" Margin="10" FontSize="20" Height="40" Width="211"/>
+        </StackPanel>
+
+        <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" Grid.Column="0" Grid.Row="2" Width="780">
+
+            <Label Content="Type de douleur thoracique" FontSize="20" Height="40" Margin="40 0 10 0" Width="259"/>
+            <ComboBox FontSize="20" Height="40" Width="430" Margin="10"
+                      ItemsSource="{Binding TypesDouleurThoracique}" SelectedIndex="{Binding SelectedTypesDouleurThoracique}"/>
+        </StackPanel>
+
+        <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" Grid.Column="0" Grid.Row="3" Width="780">
+            <Label Content="Thalassémie" FontSize="20" Height="40" Width="145" Margin="40 0 130 0" />
+            <ComboBox FontSize="20" Height="40" Width="430"
+                      ItemsSource="{Binding Thalassemie}" SelectedIndex="{Binding SelectedThalassemie}"/>
+        </StackPanel>
+
+        <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" Grid.Column="0" Grid.Row="4" Width="780">
+
+            <Label FontSize="20" Height="40" Margin="40 0 55 0" Width="515" HorizontalContentAlignment="Center"
+                   Content="Dépression ST induite par l'exercice par rapport au repos"/>
+            <!--https://stackoverflow.com/a/14600905-->
+            <TextBox Name="TextBoxOldPeak" TextWrapping="Wrap" FontSize="20" Height="40" Margin="10" Width="130"
+                     Text="{Binding OldPeak, UpdateSourceTrigger=PropertyChanged, StringFormat=N1}"/>
+        </StackPanel>
+
+        <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" Grid.Column="0" Grid.Row="5" Width="780">
+            <Label FontSize="20" Height="40" Margin="40 0 55 0" Width="515"
+                   Content="Nombre de gros vaisseaux colorés par fluoroscopie"/>
+            <TextBox Name="TextBoxFluoroscopie" Margin="10" TextWrapping="Wrap" FontSize="20" Height="40" Width="130"
+                     Text="{Binding Fluoroscopie, UpdateSourceTrigger=PropertyChanged}"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Grid.Column="0" Grid.Row="6" Width="780">
+            <!--https://stackoverflow.com/a/16340745-->
+            <Button Content="Diagnostiquer" Margin="80 0 100 10" FontSize="20" Height="40" Width="156" Command="{Binding Diagnose}">
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="IsEnabled" Value="False"/>
+                        <Style.Triggers>
+                            <MultiDataTrigger>
+                                <MultiDataTrigger.Conditions>
+                                    <Condition Binding="{Binding Path=(Validation.HasError), ElementName=TextBoxOldPeak}" Value="False"/>
+                                    <Condition Binding="{Binding Path=(Validation.HasError), ElementName=TextBoxFluoroscopie}" Value="False"/>
+                                </MultiDataTrigger.Conditions>
+                                <Setter Property="IsEnabled" Value="True"/>
+                            </MultiDataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
+            <TextBlock TextWrapping="Wrap" FontSize="20" Height="40" Margin="10 10 0 0"
+              Text="{Binding DiagnosticMessage}" TextAlignment="Center" />
+        </StackPanel>
+    </Grid>
+</UserControl>
