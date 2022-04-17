@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -18,11 +19,16 @@ namespace RestApi.Models
         }
 
         public int Id { get; set; }
+        [Required(ErrorMessage = "Champ requis!")]
         public string? FirstName { get; set; }
+        [Required(ErrorMessage = "Champ requis!")]
         public string? LastName { get; set; }
+        [Required(ErrorMessage = "Champ requis!")]
         [Column(TypeName = "date")]
         public DateTime Birthdate { get; set; }
+        [Required(ErrorMessage = "Champ requis!")]
         public GenderEnum Gender { get; set; }
+        [Required(ErrorMessage = "Champ requis!")]
         public string? City { get; set; }
 
         public Person()

@@ -1,43 +1,43 @@
 ﻿
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @{
     ViewData["Title"] = "Informations";
      Layout = "~/Views/Shared/_Layout.cshtml";
    // Layout = "_Formulaire";
 }
+@model RestApi.Models.Doctor
 
-<form class="form" asp-action="Upadate" style="margin:60px">
+<form class="form" asp-action="Update" style="margin:60px">
     <div class="form-group">
-        <label for="Nom" asp-for="lastName">Nom</label>
-        <input type="text" asp-for="lastName" id="Nom" class="form-control" placeholder="Nom"/>
-        <span asp-for-validation="lastName" class="text-danger"> </span>
-
+        <label for="Nom" asp-for="LastName">Nom</label>
+        <input type="text" asp-for="LastName" id="Nom" class="form-control" placeholder="Nom"/>
+         <span asp-validation-for="LastName" class="text-danger" ></span>
     </div><br />
       <div class="form-group">
-
         <label for="Prénom" asp-for="FirstName">Prénom</label>
         <input type="text" asp-for="FirstName" id="Prénom" class="form-control" placeholder="Prénom"/>
-          <span asp-for-validation="FirstName" class="text-danger"> </span>
+          <span asp-validation-for="FirstName" class="text-danger"> </span>
     </div><br />
       <div class="form-group">
 
-        <label for="DateNaissance" asp-for="birthdate">Date Naissance</label>
-        <input type="text" asp-for="birthdate" id="DateNaissance" class="form-control" placeholder="Date"/>
-         <span asp-validation-for="birthdate" class="text-danger" ></span>
+        <label for="DateNaissance" asp-for="Birthdate">Date Naissance</label>
+        <input type="text" asp-for="Birthdate" id="DateNaissance" class="form-control" placeholder="Date"/>
+         <span asp-validation-for="Birthdate" class="text-danger" ></span>
     </div><br />
     <div>
 
-        <label for="genre" asp-for="GenderEnum">Je suis</label>
-        <input type="radio" asp-for="GenderEnum" name="genre" value="Homme"> Homme
-        <input type="radio" asp-for="GenderEnum" name="genre" value="femme"> femme
-        <span asp-validation-for="GenderEnum" class="text-danger" ></span>
+        <label for="genre" asp-for="Gender">Je suis</label>
+        <input type="radio" asp-for="Gender" name="genre" value="Homme"> Homme
+        <input type="radio" asp-for="Gender" name="genre" value="femme"> femme
+        <span asp-validation-for="Gender" class="text-danger" ></span>
     </div><br />
     <div>
         
-             <label for="Ville" asp-for="city">Ville</label>
+             <label for="Ville" asp-for="City">Ville</label>
          <select>
-            <option value="Rimouski" asp-for="city">Rimouski</option>
-             <option value="Montreal" asp-for="city">Montreal</option>
-              <span asp-validation-for="city"  ></span>
+            <option value="Rimouski" asp-for="City">Rimouski</option>
+             <option value="Montreal" asp-for="City">Montreal</option>
+              <span asp-validation-for="City" class="text-danger" ></span>
          
          </select>
     </div><br/>
@@ -45,14 +45,14 @@
 
         <label for="DateDebut" asp-for="DateEntryOffice">Date début carière</label>
         <input type="text" asp-for="DateEntryOffice" id="DateDebut" class="form-control" placeholder="Date"/>
-        <span asp-validation-for="DateEntryOffice"></span>
+        <span asp-validation-for="DateEntryOffice" class="text-danger"></span>
     </div><br />
     
         <div>
 
-        <label for="Email" asp-for="email" >Adresse email</label>
-        <input type="text" asp-for="email" id="Email" class="form-control" placeholder="Email"/>
-        <span asp-validation-for="email"  ></span>
+        <label for="Email" asp-for="Email" >Adresse email</label>
+        <input type="text" asp-for="Email" id="Email" class="form-control" placeholder="Email"/>
+        <span asp-validation-for="Email" class="text-danger" ></span>
     </div><br />
     
         <div>
