@@ -5,19 +5,14 @@ namespace RestApi.Services
 {
     public class AuthenticationService
     {
-        private PasswordHasher<string> passwordHasher;
+        private static PasswordHasher<string> passwordHasher = new PasswordHasher<string>();
 
-        public AuthenticationService()
-        {
-            passwordHasher = new PasswordHasher<string>();
-        }
-
-        public string HashPassword(string username, string password)
+        public static string HashPassword(string username, string password)
         {
             return passwordHasher.HashPassword(username, password);
         }
 
-        public bool VerifyHashedPassword(string username, string hashedPassword, string password)
+        public static bool VerifyHashedPassword(string username, string hashedPassword, string password)
         {
             return passwordHasher.VerifyHashedPassword(username, hashedPassword, password) == PasswordVerificationResult.Success;
         }

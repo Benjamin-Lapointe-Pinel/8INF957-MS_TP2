@@ -100,7 +100,7 @@ namespace RestApi.Migrations
                             FirstName = "Benjamin",
                             Gender = 0,
                             LastName = "Lapointe-Pinel",
-                            Password = "AQAAAAEAACcQAAAAEFbiw0PYmG4kIhkaH26Iia+dkuCEKOUgMvZ1g4c12R1ojTHNYF25n4QIrlmNh+LcyA==",
+                            Password = "AQAAAAEAACcQAAAAEPQdp0cFcY+jM22Lkr+xzw0z751WBOCBHxHrhhChPJ4d139MsJDsDmJg2O2WLh0bZQ==",
                             Username = "blp"
                         },
                         new
@@ -113,7 +113,7 @@ namespace RestApi.Migrations
                             FirstName = "Zaid",
                             Gender = 0,
                             LastName = "Tidjet",
-                            Password = "AQAAAAEAACcQAAAAEAFfPaEOY/C/7zYmYfRQJizMxXil3fPEn+TJFQO6JPDU4w6iHyBEpqIeREfLa94pvg==",
+                            Password = "AQAAAAEAACcQAAAAEOnjyP8h2PgEzf5meJAhgU/yoCT63bXUHbQdd8kQlX4Ip+oOod4+8hj/9/6wfSqf6w==",
                             Username = "zt"
                         });
                 });
@@ -130,6 +130,9 @@ namespace RestApi.Migrations
                     b.Property<string>("City")
                         .HasColumnType("longtext");
 
+                    b.Property<int>("DoctorId")
+                        .HasColumnType("int");
+
                     b.Property<string>("FirstName")
                         .HasColumnType("longtext");
 
@@ -141,27 +144,9 @@ namespace RestApi.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Patients");
+                    b.HasIndex("DoctorId");
 
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Birthdate = new DateTime(1995, 11, 13, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            City = "Rimouski",
-                            FirstName = "Benjamin",
-                            Gender = 0,
-                            LastName = "Lapointe-Pinel"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Birthdate = new DateTime(1995, 7, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            City = "Rimouski",
-                            FirstName = "Zaid",
-                            Gender = 0,
-                            LastName = "Tidjet"
-                        });
+                    b.ToTable("Patients");
                 });
 
             modelBuilder.Entity("RestApi.Models.DiagnosticDB", b =>
@@ -173,6 +158,22 @@ namespace RestApi.Migrations
                         .IsRequired();
 
                     b.Navigation("Patient");
+                });
+
+            modelBuilder.Entity("RestApi.Models.Patient", b =>
+                {
+                    b.HasOne("RestApi.Models.Doctor", "Doctor")
+                        .WithMany("Patients")
+                        .HasForeignKey("DoctorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Doctor");
+                });
+
+            modelBuilder.Entity("RestApi.Models.Doctor", b =>
+                {
+                    b.Navigation("Patients");
                 });
 
             modelBuilder.Entity("RestApi.Models.Patient", b =>

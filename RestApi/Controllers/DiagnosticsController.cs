@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -11,6 +12,8 @@ using RestApi.Models;
 
 namespace RestApi.Controllers
 {
+    [Authorize]
+    [Produces("application/json")]
     [Route("api/diagnostics")]
     [ApiController]
     public class DiagnosticsController : ControllerBase
@@ -22,12 +25,18 @@ namespace RestApi.Controllers
             tp2Context = new TP2Context();
         }
 
+        private DiagnosticDB getContextDiagnostics(int id)
+        {
+            int doctorId = int.Parse(HttpContext.User.Claims.Single(c => c.Type == "DoctorId").Value);
+            return tp2Context.Diagnostics.Include("Patient").Where(d => d.Patient.DoctorId == doctorId && d.Id == id).SingleOrDefault();
+        }
+
         [HttpGet("{id}")]
         public IActionResult Get(int id)
         {
             try
             {
-                DiagnosticDB diagnostic = tp2Context.Diagnostics.Include("Patient").SingleOrDefault(x => x.Id == id);
+                DiagnosticDB diagnostic = getContextDiagnostics(id);
                 if (diagnostic == null)
                 {
                     return NotFound();
@@ -54,7 +63,7 @@ namespace RestApi.Controllers
         {
             try
             {
-                DiagnosticDB diagnostic = tp2Context.Diagnostics.Find(id);
+                DiagnosticDB diagnostic = getContextDiagnostics(id);
                 if (diagnostic == null)
                 {
                     return NotFound();

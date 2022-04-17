@@ -25,11 +25,21 @@ namespace RestApi
             knn.Train(trainingFile, 6, "euclidean");
         }
 
+        private List<Patient> GetContextDoctorPatients()
+        {
+            int doctorId = int.Parse(HttpContext.User.Claims.Single(c => c.Type == "DoctorId").Value);
+            return tp2Context.Patients.Where(p => p.DoctorId == doctorId).ToList();
+        }
+
+        private Patient? GetContextDoctorPatient(int id)
+        {
+            return GetContextDoctorPatients().Where(p => p.Id == id).SingleOrDefault();
+        }
+
         [HttpGet]
         public IActionResult Get()
         {
-            string doctorId = HttpContext.User.Claims.Single(c => c.Type == "DoctorId").Value;
-            return Ok(tp2Context.Patients);
+            return Ok(GetContextDoctorPatients());
         }
 
         [HttpGet("{id}")]
@@ -37,7 +47,7 @@ namespace RestApi
         {
             try
             {
-                Patient? patient = tp2Context.Patients.Find(id);
+                Patient? patient = GetContextDoctorPatient(id);
                 if (patient == null)
                 {
                     return NotFound();
@@ -54,6 +64,12 @@ namespace RestApi
         [HttpPost]
         public IActionResult Post([FromBody] PatientDTO patientDto)
         {
+            int doctorId = int.Parse(HttpContext.User.Claims.Single(c => c.Type == "DoctorId").Value);
+            Doctor? doctor = tp2Context.Doctors.Find(doctorId);
+            if (doctor == null || patientDto.MissingFields)
+            {
+                return BadRequest();
+            }
             try
             {
                 Patient patient = new()
@@ -62,7 +78,9 @@ namespace RestApi
                     LastName = patientDto.LastName,
                     Birthdate = patientDto.Birthdate,
                     Gender = patientDto.Gender,
-                    City = patientDto.City
+                    City = patientDto.City,
+                    DoctorId = doctor.Id,
+                    Doctor = doctor
                 };
 
                 tp2Context.Patients.Add(patient);
@@ -81,12 +99,11 @@ namespace RestApi
         {
             try
             {
-                Patient? patient = tp2Context.Patients.Find(id);
-                if (patient == null)
+                Patient? patient = GetContextDoctorPatient(id);
+                if (patient == null || patientDto.MissingFields)
                 {
                     return NotFound();
                 }
-
 
                 patient.FirstName = patientDto.FirstName;
                 patient.LastName = patientDto.LastName;
@@ -107,7 +124,7 @@ namespace RestApi
         {
             try
             {
-                Patient? patient = tp2Context.Patients.Find(id);
+                Patient? patient = GetContextDoctorPatient(id);
                 if (patient == null)
                 {
                     return NotFound();
@@ -128,14 +145,14 @@ namespace RestApi
         {
             try
             {
-                Patient? patient = tp2Context.Patients.Include("DiagnosticDBs").SingleOrDefault(x => x.Id == id);
-
+                int doctorId = int.Parse(HttpContext.User.Claims.Single(c => c.Type == "DoctorId").Value);
+                Patient? patient = tp2Context.Patients.Include("DiagnosticDBs").SingleOrDefault(p => p.Id == id && p.DoctorId == doctorId);
                 if (patient == null)
                 {
                     return NotFound();
                 }
 
-                return Ok(patient.DiagnosticDBs?.Select(d => new { d.CP, d.CA, d.OldPeak, d.Thal, d.Target }));
+                return Ok(patient.DiagnosticDBs?.Select(d => new { d.Id, d.CP, d.CA, d.OldPeak, d.Thal, d.Target }));
             }
             catch (Exception)
             {
@@ -149,8 +166,7 @@ namespace RestApi
         {
             try
             {
-                Patient? patient = tp2Context.Patients.Find(id);
-
+                Patient? patient = GetContextDoctorPatient(id);
                 if (patient == null)
                 {
                     return NotFound();
@@ -170,6 +186,7 @@ namespace RestApi
                 tp2Context.SaveChanges();
                 return Ok(new
                 {
+                    diagnostic.Id,
                     diagnostic.CP,
                     diagnostic.CA,
                     diagnostic.OldPeak,

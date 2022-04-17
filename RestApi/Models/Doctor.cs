@@ -18,6 +18,8 @@ namespace RestApi.Models
         [Column(TypeName = "date")]
         public DateTime DateEntryOffice { get; set; }
         public string? Email { get; set; }
+        [JsonIgnore]
+        public ICollection<Patient> Patients { get; set; } = new List<Patient>();
 
         public Doctor()
         { 

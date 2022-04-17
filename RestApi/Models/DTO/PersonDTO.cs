@@ -13,12 +13,18 @@ namespace RestApi.Models.DTO
 {
     public class PersonDTO
     {
-
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
+        public string? FirstName { get; set; }
+        public string? LastName { get; set; }
         public DateTime Birthdate { get; set; }
         public GenderEnum Gender { get; set; }
-        public string City { get; set; }
+        public string? City { get; set; }
+
+        public virtual bool MissingFields =>
+            string.IsNullOrEmpty(FirstName) ||
+            string.IsNullOrEmpty(LastName) ||
+            Birthdate == null ||
+            Gender == null ||
+            string.IsNullOrEmpty(City);
 
         public PersonDTO(string firstName, string lastName, DateTime birthdate, GenderEnum gender, string city)
         {
@@ -27,6 +33,6 @@ namespace RestApi.Models.DTO
             Birthdate = birthdate;
             Gender = gender;
             City = city;
-        }   
+        }
     }
 }
