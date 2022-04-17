@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
@@ -15,8 +16,10 @@ namespace RestApi.Models
         public string Username { get; set; }
         [JsonIgnore]
         public string Password { get; set; }
+        [Required(ErrorMessage = "Champ requis!")]
         [Column(TypeName = "date")]
         public DateTime DateEntryOffice { get; set; }
+        [Required(ErrorMessage = "Champ requis!")]
         public string? Email { get; set; }
         [JsonIgnore]
         public ICollection<Patient> Patients { get; set; } = new List<Patient>();

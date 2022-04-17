@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using RestApi.Models;
 
 namespace _8INF957_MS_TP2.Models
 {

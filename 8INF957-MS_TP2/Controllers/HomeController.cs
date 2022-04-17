@@ -2,9 +2,8 @@
 using _8INF957_MS_TP2.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using static _8INF957_MS_TP2.Person;
-
-
+using RestApi;
+using RestApi.Models;
 
 namespace _8INF957_MS_TP2.Controllers
 {
@@ -24,8 +23,8 @@ namespace _8INF957_MS_TP2.Controllers
         public IActionResult Informations(int Id,string firstname)
         {
             if (ModelState.IsValid) {
-                TP2Context db = new Models.TP2Context();
-                Models.Doctor doctor = db.Doctors.Find(Id);
+                TP2Context db = new TP2Context();
+                Doctor doctor = db.Doctors.Find(Id);
                 doctor.FirstName = firstname;
                 db.SaveChanges();
             }
@@ -35,11 +34,7 @@ namespace _8INF957_MS_TP2.Controllers
 
         public IActionResult Diagnostique()
         {
-            return View(new PatientsList(new List<Patient>()
-            {
-                new Patient("Benjamin", "Lapointe-Pinel", new(1995, 11, 13), GenderEnum.Man, "Rimouski","présent"),
-                new Patient("Zaid", "Tidjet", new(1995, 7, 5), GenderEnum.Man, "Rimouski","présent")
-            }));
+            return View(new PatientsList(new List<Patient>()));
         }
 
         public IActionResult ConfigurationIA()
@@ -53,13 +48,13 @@ namespace _8INF957_MS_TP2.Controllers
         }
         //Ajouter une liste de Doctors
         [HttpPost]
-        public IActionResult CreerCompte(List<Models.Doctor>doctors)
+        public IActionResult CreerCompte(List<Doctor>doctors)
 
         {
             if (ModelState.IsValid)
             {
 
-                Models.TP2Context db = new Models.TP2Context();
+                TP2Context db = new TP2Context();
                 db.Doctors.AddRange(doctors);
                 db.SaveChanges();
                 return RedirectToAction("Résultat", doctors);
@@ -91,9 +86,9 @@ namespace _8INF957_MS_TP2.Controllers
         }
         //ajouter un patient
         [HttpPost]
-        public IActionResult AjoutPatient(Models.Patient patient)
+        public IActionResult AjoutPatient(Patient patient)
         {
-            Models.TP2Context db = new Models.TP2Context();
+            TP2Context db = new TP2Context();
             db.Patients.Add(patient);
             db.SaveChanges();
 
@@ -104,7 +99,7 @@ namespace _8INF957_MS_TP2.Controllers
         public  IActionResult AjoutPatient(int Id)
         {
             TP2Context db = new TP2Context();
-            Models.Patient patient = db.Patients.Find(Id);
+            Patient patient = db.Patients.Find(Id);
             db.Patients.Remove(patient);
             db.SaveChanges();
             return View(patient);
@@ -114,16 +109,11 @@ namespace _8INF957_MS_TP2.Controllers
         public IActionResult AjoutPatient(string Firstname)
         {
             TP2Context db = new TP2Context();
-            Models.Patient patient = db.Patients.Find(Firstname);
+            Patient patient = db.Patients.Find(Firstname);
             db.Patients.Remove(patient);
             db.SaveChanges();
             return View(patient);
 
-        }
-        public IActionResult Résult(Models.Doctor doctor)
-        {
-            return View(doctor);
-        }
-       
+        }       
     }
 }

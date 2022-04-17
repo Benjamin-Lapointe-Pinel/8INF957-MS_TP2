@@ -6,7 +6,7 @@
    // @ViewBag.Title="Ajouter un patient";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-@model _8INF957_MS_TP2.Models.Patient
+@model RestApi.Models.Patient
 <form style="margin : 60px" class="form" asp-action="Add">
     <div class="form-group" >
         <label for="Nom" asp-for="FirstName">Nom</label>
@@ -34,18 +34,18 @@
     </div><br />
      <div>
         
-             <label for="Ville" asp-for="city">Ville</label>
+             <label for="Ville" asp-for="City">Ville</label>
          <select>
             <option value="Rimouski"  asp-for="city">Rimouski</option>
              <option value="Montreal"  asp-for="city">Montreal</option>
-             <span asp-validation-for="city" class="text-danger" ></span>
+             <span asp-validation-for="City" class="text-danger" ></span>
          
          </select>
     </div>
     <div>
-        <label for="Dernier_Diagnostique" asp-for="Diagnose">Dernier diagnostique</label>
-        <input type="text" asp-for="Diagnose" value="Dernier_Diagnostique" placeholder="Présence/abscence de maladie"/>
-         <span asp-validation-for="Diagnose" class="text-danger" ></span>
+        <label for="Dernier_Diagnostique" asp-for="DiagnosticDBs">Dernier diagnostique</label>
+        <input type="text" asp-for="DiagnosticDBs" value="Dernier_Diagnostique" placeholder="Présence/abscence de maladie"/>
+         <span asp-validation-for="DiagnosticDBs" class="text-danger" ></span>
     </div><br />
         <div class="mb-3">
             <button type="submit" value="Ajouter" class="btn btn-secondary" style="background-color :green">Ajouter</button>

@@ -7,7 +7,7 @@
        
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-@model _8INF957_MS_TP2.Models.Doctor
+@model RestApi.Models.Doctor
 
 <form style="margin: 60px" class="form" asp-action="CreerCompte">
     <div class="form-group">
@@ -23,25 +23,25 @@
     </div><br />
       <div class="form-group">
 
-        <label for="birthdate" asp-for="birthdate">Date Naissance</label>
-        <input type="text" asp-for="birthdate" id="birthdate"  class = " form-control"  placeholder="Date"/>
-        <span asp-validation-for="birthdate" class="text-danger" ></span>
+        <label for="birthdate" asp-for="Birthdate">Date Naissance</label>
+        <input type="text" asp-for="Birthdate" id="birthdate"  class = " form-control"  placeholder="Date"/>
+        <span asp-validation-for="Birthdate" class="text-danger" ></span>
     </div><br />
     <div class="form-group">
 
-        <label for="gender" asp-for="GenderEnum">Je suis</label>
-        <input type="radio" asp-for="GenderEnum" id="GenderEnum" value="Homme"> Homme
-        <input type="radio" asp-for="GenderEnum" id="GenderEnum" value="femme"> femme
-         <span asp-validation-for="GenderEnum"  ></span>
+        <label for="gender" asp-for="Gender">Je suis</label>
+        <input type="radio" asp-for="Gender" id="GenderEnum" value="Homme"> Homme
+        <input type="radio" asp-for="Gender" id="GenderEnum" value="femme"> femme
+         <span asp-validation-for="Gender"  ></span>
         
     </div><br />
     <div class="form-group">
         
-             <label for="city" asp-for="city">Ville</label>
+             <label for="city" asp-for="City">Ville</label>
          <select>
             <option value="Rimouski" asp-for="city">Rimouski</option>
              <option value="Montreal"asp-for="city" >Montreal</option>
-             <span asp-validation-for="city"  ></span>
+             <span asp-validation-for="City"  ></span>
          
          </select>
     </div><br />
@@ -54,9 +54,9 @@
     
         <div class="form-group">
 
-        <label for="Email" asp-for="email" >Adresse email</label>
-        <input type="text" asp-for="email" id="Email" placeholder="Email"  class = "form-control" />
-        <span asp-validation-for="email"  ></span>
+        <label for="Email" asp-for="Email" >Adresse email</label>
+        <input type="text" asp-for="Email" id="Email" placeholder="Email"  class = "form-control" />
+        <span asp-validation-for="Email"  ></span>
     </div><br />
     
         <div class="mb-3" >
