@@ -13,7 +13,7 @@ namespace RestApi.Controllers
 {
     [Authorize]
     [Produces("application/json")]
-    [Route("api/info")]
+    [Route("api")]
     [ApiController]
     public class DoctorsController : ControllerBase
     {
