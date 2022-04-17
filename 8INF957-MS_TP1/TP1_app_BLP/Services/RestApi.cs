@@ -7,6 +7,7 @@ using System.Net.Http.Headers;
 using System.Text;
 using Newtonsoft.Json;
 using TP01_HeartDiseaseDiagnostic;
+using TP1_app_BLP.Model;
 using TP1_app_BLP.Models;
 
 namespace TP1_app_BLP.Services
@@ -92,6 +93,18 @@ namespace TP1_app_BLP.Services
             }
             string data = response.Content.ReadAsStringAsync().Result;
             return JsonConvert.DeserializeObject<Patient>(data);
+        }
+
+        public Diagnostic? Diagnose(Patient patient, Diagnostic diagnostic)
+        {
+            StringContent content = new StringContent(JsonConvert.SerializeObject(diagnostic), Encoding.UTF8, "application/json");
+            HttpResponseMessage response = client.PostAsync("patients/" + patient.Id + "/diagnose", content).Result;
+            if (!response.IsSuccessStatusCode)
+            {
+                return null;
+            }
+            string data = response.Content.ReadAsStringAsync().Result;
+            return JsonConvert.DeserializeObject<Diagnostic>(data);
         }
     }
 }

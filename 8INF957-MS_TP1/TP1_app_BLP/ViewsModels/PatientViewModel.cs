@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using TP01_HeartDiseaseDiagnostic;
+using TP1_app_BLP.Model;
 
 namespace TP1_app_BLP.ViewsModels
 {
@@ -24,7 +25,21 @@ namespace TP1_app_BLP.ViewsModels
             "Rivière-du-Loup"
         };
         public string Title => IsReadOnly ? "Informations patient" : "Ajout patient";
-        public string DiagnosticMessage => Patient.Diagnostic ? "Résultat : Présence de Maladie" : "Résultat : Absence de Maladie";
+        public string DiagnosticMessage
+        {
+            get
+            {
+                if (Patient.Diagnostics.Any())
+                {
+                    return Patient.Diagnostics.Last().Target ? "Résultat : Présence de Maladie" : "Résultat : Absence de Maladie";
+                }
+                else
+                {
+                    return "Aucun Diagnostique";
+                }
+            }
+        }
+
         public bool IsReadOnly { get; private set; }
         public bool IsEnabled => !IsReadOnly;
         private Patient _patient;

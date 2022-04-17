@@ -38,7 +38,7 @@ namespace TP01_HeartDiseaseDiagnostic
             float success = 0;
             foreach (Diagnostic heartDiagnostic in tests)
             {
-                if (Predict(heartDiagnostic) == heartDiagnostic.Label)
+                if (Predict(heartDiagnostic) == heartDiagnostic.Target)
                 {
                     success++;
                 }
@@ -49,7 +49,7 @@ namespace TP01_HeartDiseaseDiagnostic
         public bool Predict(Diagnostic sample)
         {
             List<float> distances = heartDiagnostics.Select(hd => distanceFunction(hd, sample)).ToList();
-            List<bool> labels = heartDiagnostics.Select(hd => hd.Label).ToList();
+            List<bool> labels = heartDiagnostics.Select(hd => hd.Target).ToList();
             ShellSort(distances, labels);
 
             return Vote(labels.Take(k).ToList());

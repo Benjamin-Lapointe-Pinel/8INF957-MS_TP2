@@ -9,7 +9,7 @@ namespace TP01_HeartDiseaseDiagnostic
     internal interface IDiagnostic
     {
         float[] Features { get; }
-        bool Label { get; }
+        bool Target { get; }
         void PrintInfo();
     }
 }

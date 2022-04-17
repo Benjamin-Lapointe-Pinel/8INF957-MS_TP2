@@ -23,12 +23,15 @@ namespace TP1_app_BLP.Model
             Features[2] = oldPeak;
             Features[3] = fluoroscopy;
 
-            Label = diagnostic == 1;
+            Target = diagnostic == 1;
         }
 
         public float[] Features { get; private set; }
-
-        public bool Label { get; private set; }
+        public bool Target { get; set; }
+        public float CP => Features[0];
+        public float Thal => Features[1];
+        public float OldPeak => Features[2];
+        public float CA => Features[3];
 
         public void PrintInfo()
         {
@@ -41,7 +44,7 @@ namespace TP1_app_BLP.Model
                 $"thalassemia : {Features[1]}, " +
                 $"old peak : {Features[2]}, " +
                 $"fluoroscopy : {Features[3]}, " +
-                $"diagnostic : {Label}";
+                $"diagnostic : {Target}";
         }
     }
 }

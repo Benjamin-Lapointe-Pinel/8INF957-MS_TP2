@@ -47,7 +47,7 @@ namespace TP1_app_BLP.ViewsModels
         private string trainFile;
         private string testFile;
         private IKNN knn;
-        private bool diagnoseReady => knn != null &&
+        private bool diagnoseReady =>
             OldPeak >= 0 && OldPeak <= 6.2 &&
             Fluoroscopie >= 0 && Fluoroscopie <= 3;
         public int K { get; set; } = 1;
@@ -144,8 +144,8 @@ namespace TP1_app_BLP.ViewsModels
             Diagnose = new RelayCommand(() =>
             {
                 Diagnostic diagnostic = new(SelectedTypesDouleurThoracique, SelectedThalassemie + 1, OldPeak, Fluoroscopie);
-                SelectedPatient.Diagnostic = knn.Predict(diagnostic);
-                if (SelectedPatient.Diagnostic)
+                diagnostic = RestApi.Client.Diagnose(SelectedPatient, diagnostic);
+                if (diagnostic.Target)
                 {
                     DiagnosticMessage = "Résultat : Présence de Maladie";
                 }
