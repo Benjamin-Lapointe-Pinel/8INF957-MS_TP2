@@ -11,11 +11,11 @@
     <StackPanel Orientation="Vertical">
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
             <Label>Nom d'utilisateur :</Label>
-            <TextBox VerticalAlignment="Center" Width="200" />
+            <TextBox VerticalAlignment="Center" Width="200" Text="{Binding AuthenticationRequest.UserName, UpdateSourceTrigger=PropertyChanged}"/>
         </StackPanel>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
             <Label>Mot de passe :</Label>
-            <TextBox VerticalAlignment="Center" Width="200" />
+            <TextBox VerticalAlignment="Center" Width="200" Text="{Binding AuthenticationRequest.Password, UpdateSourceTrigger=PropertyChanged}" />
         </StackPanel>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
             <Button

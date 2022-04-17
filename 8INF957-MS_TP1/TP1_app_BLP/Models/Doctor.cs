@@ -8,11 +8,11 @@ namespace TP01_HeartDiseaseDiagnostic
 {
     public class Doctor : Person
     {
-        public DateOnly DateEntryOffice { get; set; }
+        public DateTime DateEntryOffice { get; set; }
         public string Email { get; set; }
         public override bool IsValid => base.IsValid && !string.IsNullOrWhiteSpace(Email);
 
-        public Doctor(string firstName, string lastName, DateOnly birthdate, GenderEnum gender, string city, DateOnly dateEntryOffice, string email)
+        public Doctor(string firstName, string lastName, DateTime birthdate, GenderEnum gender, string city, DateTime dateEntryOffice, string email)
             : base(firstName, lastName, birthdate, gender, city)
         {
             DateEntryOffice = dateEntryOffice;
@@ -21,7 +21,7 @@ namespace TP01_HeartDiseaseDiagnostic
 
         public Doctor() : base()
         {
-            DateEntryOffice = DateOnly.FromDateTime(DateTime.Now);
+            DateEntryOffice = DateTime.Now;
             Email = "";
             City = "";
         }

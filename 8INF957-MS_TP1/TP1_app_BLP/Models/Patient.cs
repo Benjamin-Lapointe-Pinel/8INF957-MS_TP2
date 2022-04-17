@@ -14,7 +14,7 @@ namespace TP01_HeartDiseaseDiagnostic
         {
         }
 
-        public Patient(string firstName, string lastName, DateOnly birthdate, GenderEnum gender, string city, bool diagnostic = false)
+        public Patient(string firstName, string lastName, DateTime birthdate, GenderEnum gender, string city, bool diagnostic = false)
             : base(firstName, lastName, birthdate, gender, city)
         {
             Diagnostic = diagnostic;

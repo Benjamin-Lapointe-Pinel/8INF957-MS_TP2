@@ -52,7 +52,7 @@
                 Height="41"
                 Width="375"
                 IsEnabled="{Binding IsEnabled}"
-                SelectedDate="{Binding Doctor.Birthdate, Converter={StaticResource DateConverter}, UpdateSourceTrigger=PropertyChanged }"/>
+                SelectedDate="{Binding Doctor.Birthdate, UpdateSourceTrigger=PropertyChanged }"/>
         </StackPanel>
 
 
@@ -94,7 +94,7 @@
                 Height="41"
                 Width="366"
                 IsEnabled="{Binding IsEnabled}"
-                SelectedDate="{Binding Doctor.DateEntryOffice, Converter={StaticResource DateConverter}, UpdateSourceTrigger=PropertyChanged }"/>
+                SelectedDate="{Binding Doctor.DateEntryOffice, UpdateSourceTrigger=PropertyChanged }"/>
         </StackPanel>
         <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" Grid.Column="0" Grid.Row="5" Grid.RowSpan="2" Width="780"  >
             <Label Content="Adresse e-mail" Margin="10"  FontSize="22" Height="41" Width="358"/>

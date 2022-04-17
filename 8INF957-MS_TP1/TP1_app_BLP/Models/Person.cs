@@ -18,7 +18,7 @@ namespace TP01_HeartDiseaseDiagnostic
 
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public DateOnly Birthdate { get; set; }
+        public DateTime Birthdate { get; set; }
         public GenderEnum Gender { get; set; }
         public string City { get; set; }
 
@@ -28,11 +28,11 @@ namespace TP01_HeartDiseaseDiagnostic
         {
             FirstName = "";
             LastName = "";
-            Birthdate = DateOnly.FromDateTime(DateTime.Now);
+            Birthdate = DateTime.Now;
             Gender = GenderEnum.Man;
         }
 
-        public Person(string firstName, string lastName, DateOnly birthdate, GenderEnum gender, string city)
+        public Person(string firstName, string lastName, DateTime birthdate, GenderEnum gender, string city)
         {
             FirstName = firstName;
             LastName = lastName;
