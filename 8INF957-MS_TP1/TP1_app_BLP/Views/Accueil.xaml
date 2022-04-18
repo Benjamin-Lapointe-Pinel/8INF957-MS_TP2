@@ -22,8 +22,8 @@
         <TabItem Header="Diagnostique">
             <usercontrols:DiagnosticUserControl/>
         </TabItem>
-        <TabItem Header="Configuration IA">
+        <!--<TabItem Header="Configuration IA">
             <usercontrols:ConfigIaUserControl/>
-        </TabItem>
+        </TabItem>-->
     </TabControl>
 </Window>

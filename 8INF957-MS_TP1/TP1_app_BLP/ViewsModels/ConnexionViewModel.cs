@@ -24,11 +24,7 @@ namespace TP1_app_BLP.ViewsModels
 
         public ConnexionViewModel()
         {
-            AuthenticationRequest = new()
-            {
-                UserName = "blp",
-                Password = "abc123"
-            };
+            AuthenticationRequest = new();
 
             Connect = new RelayCommand<Window>(window =>
             {
