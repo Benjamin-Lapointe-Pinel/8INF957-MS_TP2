@@ -35,7 +35,7 @@ namespace _8INF957_MS_TP2.Controllers
             ClaimsIdentity identity = new(claim, CookieAuthenticationDefaults.AuthenticationScheme);
             HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(identity)).Wait();
 
-            return Redirect(ReturnUrl == null ? "/Secured" : ReturnUrl);
+            return Redirect(ReturnUrl == null ? "/Informations/Index" : ReturnUrl);
         }
 
         public IActionResult Logout()

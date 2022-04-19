@@ -6,33 +6,63 @@ using RestApi;
 using RestApi.Models;
 using System.Data.SqlClient;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.EntityFrameworkCore;
+using RestApi.Models.DTO;
 
 namespace _8INF957_MS_TP2.Controllers
 {
     [Authorize]
-    public class HomeController : Controller
+    public class InformationsController : Controller
     {
-        public IActionResult Connexion()
+        private TP2Context context;
+
+        public InformationsController(TP2Context tp2Context)
         {
-            return View();
+            context = tp2Context;
         }
+
+        private Doctor getContextDoctor()
+        {
+            int doctorId = int.Parse(HttpContext.User.Claims.Single(c => c.Type == "DoctorId").Value);
+            return context.Doctors.Find(doctorId);
+        }
+
         [HttpGet]
-        public IActionResult Informations()
+        public IActionResult Index()
         {
-            return View();
-        }
-        // gerer et mettre a jour les informations du medecin
-        [HttpPost]
-        public IActionResult Informations(int Id,string firstname)
-        {
-            if (ModelState.IsValid) {
-                TP2Context db = new TP2Context();
-                Doctor doctor = db.Doctors.Find(Id);
-                doctor.FirstName = firstname;
-                db.SaveChanges();
+            Doctor? doctor = getContextDoctor();
+            if (doctor == null)
+            {
+                return RedirectToAction("Login");
             }
-            
-            return View();
+            return View(doctor);
+        }
+
+        [HttpPost]
+        public IActionResult UpdateInformations(Doctor formDoctor)
+        {
+            try
+            {
+                Doctor? doctor = getContextDoctor();
+                if (doctor == null)
+                {
+                    return RedirectToAction("Login");
+                }
+
+                doctor.FirstName = formDoctor.FirstName;
+                doctor.LastName = formDoctor.LastName;
+                doctor.Birthdate = formDoctor.Birthdate;
+                doctor.Gender = formDoctor.Gender;
+                doctor.City = formDoctor.City;
+                doctor.DateEntryOffice = formDoctor.DateEntryOffice;
+                doctor.Email = formDoctor.Email;
+                context.SaveChanges();
+                return View("Index");
+            }
+            catch (Exception)
+            {
+                return Problem();
+            }
         }
 
         public IActionResult Diagnostique()
@@ -62,14 +92,6 @@ namespace _8INF957_MS_TP2.Controllers
             }else
             return View(doctors);
         }
-
-        //public IActionResult CreerCompte(Models.Doctor doctor)
-        //{
-        //    Models.TP2Context db = new Models.TP2Context();
-        //    db.Doctors.Add(doctor);
-        //    db.SaveChanges();
-        //    return View(doctor);
-        //}
         
         [HttpPost]
         public IActionResult ViewPatient(PatientsList patientsList)
@@ -112,13 +134,5 @@ namespace _8INF957_MS_TP2.Controllers
             return View(patient);
 
         }
-       // [Authorize(Roles = "Admin, User")]
-        public IActionResult login()
-        {
-            return View();
-        }
-        
-      
-       
     }
 }

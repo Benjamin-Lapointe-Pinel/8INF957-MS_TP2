@@ -14,7 +14,9 @@ namespace RestApi.Models
     {
         public enum GenderEnum
         {
+            [Display(Name = "Homme")]
             Man,
+            [Display(Name = "Femme")]
             Woman
         }
 
