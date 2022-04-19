@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace _8INF957_MS_TP2.Controllers
 {
+    [Authorize]
     public class HomeController : Controller
     {
         public IActionResult Connexion()
@@ -51,22 +52,16 @@ namespace _8INF957_MS_TP2.Controllers
         //Ajouter une liste de Doctors
         [HttpPost]
         public IActionResult CreerCompte(List<Doctor>doctors)
-
         {
             if (ModelState.IsValid)
             {
-
                 TP2Context db = new TP2Context();
                 db.Doctors.AddRange(doctors);
                 db.SaveChanges();
                 return RedirectToAction("Résultat", doctors);
             }else
             return View(doctors);
-
-
         }
-
-
 
         //public IActionResult CreerCompte(Models.Doctor doctor)
         //{

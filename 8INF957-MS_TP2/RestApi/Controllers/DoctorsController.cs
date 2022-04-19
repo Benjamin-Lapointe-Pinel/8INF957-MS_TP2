@@ -59,7 +59,8 @@ namespace RestApi.Controllers
                 expires: DateTime.UtcNow.AddHours(8),
                 signingCredentials: signIn);
 
-            return Ok(new JwtSecurityTokenHandler().WriteToken(token));
+            string tokenString = new JwtSecurityTokenHandler().WriteToken(token);
+            return Ok(tokenString);
         }
 
         [HttpGet("info")]
