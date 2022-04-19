@@ -40,7 +40,7 @@ namespace _8INF957_MS_TP2.Controllers
 
         public IActionResult Logout()
         {
-            var login = HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+            HttpContext.SignOutAsync().Wait();
             return RedirectToAction("Login");
         }
     }

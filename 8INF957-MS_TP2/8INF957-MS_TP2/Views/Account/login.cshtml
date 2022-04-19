@@ -1,13 +1,10 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
+﻿@{
      Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <div class="container">
     <div class="row">        
-        <div class="col-md-3">
+        <div class="col-md-5">
             <h2><strong>Login Page </strong></h2><br />
             <form asp-action="login" method="post">
                 <div class="form-group">
@@ -18,9 +15,9 @@
                     <label>Password</label>
                     <input required type="password" class="form-control" name="password" id="password" placeholder="Password">
                 </div>
-                <div class="form-check">
-                    <button class="btn btn-info" type="reset">Reset</button>
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                <div class="form-check mt-3 p-0">
+                    <button type="reset" class="btn btn-info mx-1">Annuler</button>
+                    <button type="submit" class="btn btn-primary mx-1">Connexion</button>
                 </div>
             </form>
         </div>
