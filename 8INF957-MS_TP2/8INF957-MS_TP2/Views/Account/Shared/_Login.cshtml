@@ -1,0 +1,11 @@
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@model RestApi.Models.Doctor
+
+<div class="form-group">
+	<label>Nom d'utilisateur</label>
+	<input required type="text" asp-for="LastName" class="form-control" id="userName" name="userName" placeholder="Nom d'utilisateur'">
+</div>
+<div class="form-group">
+	<label>Mot de passe</label>
+	<input required type="password" asp-for="Password" class="form-control" name="password" id="password" placeholder="Mot de passe">
+</div>

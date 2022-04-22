@@ -1,26 +1,19 @@
-﻿@{
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
 	Layout = "~/Views/Shared/_Layout.cshtml";
+	ViewData["Title"] = "Connexion";
 }
+@model RestApi.Models.Doctor
 
-<div class="container">
-	<div class="row">
-		<div class="col-md-5">
-			<h2><strong>Login Page</strong></h2><br/>
-			<form asp-action="login" method="post">
-				<div class="form-group">
-					<label>User Name</label>
-					<input required type="text" class="form-control" id="userName" name="userName" placeholder="Enter user name">
-				</div>
-				<div class="form-group">
-					<label>Password</label>
-					<input required type="password" class="form-control" name="password" id="password" placeholder="Password">
-				</div>
-				<div class="form-check mt-3 p-0">
-					<button class="btn btn-info mx-1">Créer Compte</button> <!--TODO-->
-					<button type="submit" class="btn btn-primary mx-1">Connexion</button>
-				</div>
-			</form>
-		</div>
+<!--TODO error message when invalid-->
+<form asp-controller="Account" class="col-md-5">
+	<partial name="Shared/_login" model="Model" />
+	<div class="form-check mt-3 p-0">
+		<button asp-action="NewAccount" formmethod="get" class="btn btn-info mx-1">Créer Compte</button>
+		<button asp-action="Login" formmethod="post" class="btn btn-primary mx-1">Connexion</button>
 	</div>
-</div>
-
+	@if (ViewBag.Error != null)
+	{
+		<span class="text-danger">@ViewBag.Error</span>
+	}
+</form>

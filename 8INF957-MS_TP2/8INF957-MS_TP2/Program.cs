@@ -27,7 +27,7 @@ var app = builder.Build();
 app.UseStaticFiles();
 app.UseAuthentication();
 app.UseAuthorization();
-app.UseMvc(routes => routes.MapRoute("Default", "{controller=Informations}/{action=Index}"));
+app.UseMvc(routes => routes.MapRoute("Default", "{controller=Account}/{action=Informations}"));
 
 app.Run();
 

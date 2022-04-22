@@ -1,0 +1,21 @@
+﻿@using static RestApi.Models.Person
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+	ViewData["Title"] = "Nouveau compte";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model RestApi.Models.Doctor
+
+<form class="form" asp-action="NewAccount">
+	<partial name="Shared/_login" />
+	<partial name="Shared/_Informations" model="Model" />
+	<div>
+		<button type="submit" class="btn btn-secondary" style="background-color :green">Créer</button>
+		<button type="button" onclick="location.href='@Url.Action("Login","Account")';" class="btn btn-secondary" style="background-color :red">Annuler</button>
+	</div>
+	@if (ViewBag.Error != null)
+	{
+		<span class="text-danger">@ViewBag.Error</span>
+	}
+</form>
+

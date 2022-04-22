@@ -8,8 +8,6 @@
 
 @model PatientsList
 
-<h1>Diagnostique</h1>
-
 <form asp-action="Diagnose">
 	<div class="mb-3">
 		@Html.DropDownListFor(m => m.SelectedPatientId, Model.Patients)

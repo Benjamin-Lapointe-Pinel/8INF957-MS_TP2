@@ -21,49 +21,7 @@ namespace _8INF957_MS_TP2.Controllers
             context = tp2Context;
         }
 
-        private Doctor getContextDoctor()
-        {
-            int doctorId = int.Parse(HttpContext.User.Claims.Single(c => c.Type == "DoctorId").Value);
-            return context.Doctors.Find(doctorId);
-        }
-
-        [HttpGet]
-        public IActionResult Index()
-        {
-            Doctor? doctor = getContextDoctor();
-            if (doctor == null)
-            {
-                return RedirectToAction("Login");
-            }
-            return View(doctor);
-        }
-
-        [HttpPost]
-        public IActionResult UpdateInformations(Doctor formDoctor)
-        {
-            try
-            {
-                Doctor? doctor = getContextDoctor();
-                if (doctor == null)
-                {
-                    return RedirectToAction("Login");
-                }
-
-                doctor.FirstName = formDoctor.FirstName;
-                doctor.LastName = formDoctor.LastName;
-                doctor.Birthdate = formDoctor.Birthdate;
-                doctor.Gender = formDoctor.Gender;
-                doctor.City = formDoctor.City;
-                doctor.DateEntryOffice = formDoctor.DateEntryOffice;
-                doctor.Email = formDoctor.Email;
-                context.SaveChanges();
-                return View("Index");
-            }
-            catch (Exception)
-            {
-                return Problem();
-            }
-        }
+       
 
         public IActionResult Diagnostique()
         {
