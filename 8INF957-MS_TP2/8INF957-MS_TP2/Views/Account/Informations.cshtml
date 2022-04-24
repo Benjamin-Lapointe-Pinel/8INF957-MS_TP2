@@ -6,8 +6,9 @@
 }
 @model RestApi.Models.Doctor
 
-<form class="form" asp-action="UpdateInformations">
+<form class="form col-md-5" asp-action="UpdateInformations">
 	<partial name="Shared/_Informations" model="Model" />
+	<br />
 	<div>
 		<button type="submit" value="Modifier" class="btn btn-secondary" style="background-color :green">Modifier</button>
 		<button type="reset" onclick="location.href='@Url.Action("Informations","Account")';" class="btn btn-secondary" style="background-color :red">Annuler</button>

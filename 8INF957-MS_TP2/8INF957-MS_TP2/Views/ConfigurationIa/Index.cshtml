@@ -1,0 +1,30 @@
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+	ViewData["Title"] = "Configuration IA";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model RestApi.Models.ConfigurationIa
+
+<form class="form col-md-5" asp-controller="ConfigurationIa" asp-action="Index">
+	<div class="form-group">
+		<label for="k">Paramètre k</label>
+		<input asp-for="K" class="form-control" id="k" type="number" min="1" step="1" />
+	</div>
+	<div class="form-group">
+		<label for="distance-type">Type de distance</label>
+		<select asp-for="Distance" class="form-control" id="distance-type">
+			<option value="manhattan">Manhattan</option>
+			<option value="euclidean">Euclidienne</option>
+		</select>
+	</div>
+	<br/>
+	<div class="form-group">
+		<button type="submit" class="btn btn-primary">Enregistrer</button>
+		<button type="reset" onclick="location.href='@Url.Action("Index","ConfigurationIa")';" class="btn btn-secondary" style="background-color :red">Annuler</button>
+	</div>
+	@if (ViewBag.Error != null)
+	{
+		<span class="text-danger">@ViewBag.Error</span>
+	}
+</form>
+

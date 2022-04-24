@@ -10,6 +10,7 @@ namespace RestApi
     {
         public DbSet<Patient> Patients { get; set; }
         public DbSet<DiagnosticDB> Diagnostics { get; set; }
+        public DbSet<ConfigurationIa> ConfigurationsIa { get; set; }
         public DbSet<Doctor> Doctors { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder dbContextOptionsBuilder)
@@ -23,6 +24,9 @@ namespace RestApi
         {
             modelBuilder.Entity<Doctor>()
                 .HasMany(e => e.Patients)
+                .WithOne(e => e.Doctor);
+            modelBuilder.Entity<Doctor>()
+                .HasOne(e => e.ConfigurationIa)
                 .WithOne(e => e.Doctor);
             modelBuilder.Entity<Patient>()
                 .HasOne(e => e.Doctor)

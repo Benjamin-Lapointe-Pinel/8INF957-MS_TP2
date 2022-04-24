@@ -5,9 +5,9 @@
 }
 @model RestApi.Models.Doctor
 
-<!--TODO error message when invalid-->
 <form asp-controller="Account" class="col-md-5">
 	<partial name="Shared/_login" model="Model" />
+	<br />
 	<div class="form-check mt-3 p-0">
 		<button asp-action="NewAccount" formmethod="get" class="btn btn-info mx-1">Créer Compte</button>
 		<button asp-action="Login" formmethod="post" class="btn btn-primary mx-1">Connexion</button>

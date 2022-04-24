@@ -21,11 +21,13 @@ namespace RestApi.Models
         public DateTime DateEntryOffice { get; set; }
         [Required(ErrorMessage = "Champ requis!")]
         public string? Email { get; set; }
+        public ConfigurationIa ConfigurationIa { get; set; }
         [JsonIgnore]
         public ICollection<Patient> Patients { get; set; } = new List<Patient>();
 
         public Doctor()
-        { 
+        {
+             ConfigurationIa = new ConfigurationIa(1, "euclidean");
         }
 
         public Doctor(int id, string username, string password, string firstName, string lastName, DateTime birthdate, GenderEnum gender, string city, DateTime dateEntryOffice, string email)
