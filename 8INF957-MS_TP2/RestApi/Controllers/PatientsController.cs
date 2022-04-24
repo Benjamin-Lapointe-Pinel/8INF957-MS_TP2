@@ -15,20 +15,21 @@ namespace RestApi
     public class PatientsController : ControllerBase
     {
         private readonly TP2Context tp2Context;
-        private readonly KNN knn;
 
         public PatientsController()
         {
             tp2Context = new TP2Context();
-            knn = new KNN();
-            string trainingFile = Path.Combine(Directory.GetCurrentDirectory(), "Data_HeartDiseaseDiagnostic", "train.csv");
-            knn.Train(trainingFile, 6, "euclidean");
+        }
+
+        private int GetContextDoctorId()
+        {
+            return int.Parse(HttpContext.User.Claims.Single(c => c.Type == "DoctorId").Value);
         }
 
         private List<Patient> GetContextDoctorPatients()
         {
-            int doctorId = int.Parse(HttpContext.User.Claims.Single(c => c.Type == "DoctorId").Value);
-            return tp2Context.Patients.Where(p => p.DoctorId == doctorId).ToList();
+            
+            return tp2Context.Patients.Where(p => p.DoctorId == GetContextDoctorId()).ToList();
         }
 
         private Patient? GetContextDoctorPatient(int id)
@@ -180,6 +181,11 @@ namespace RestApi
                     Thal = diagnosticDTO.Thal,
                     Patient = patient,
                 };
+
+                KNN knn = new();
+                string trainingFile = Path.Combine(Directory.GetCurrentDirectory(), "Data_HeartDiseaseDiagnostic", "train.csv");
+                ConfigurationIa configurationIa = tp2Context.ConfigurationsIa.Single(c => c.DoctorId == GetContextDoctorId());
+                knn.Train(trainingFile, configurationIa.K, configurationIa.Distance);
                 diagnostic.Target = knn.Predict(diagnostic);
 
                 tp2Context.Diagnostics.Add(diagnostic);
