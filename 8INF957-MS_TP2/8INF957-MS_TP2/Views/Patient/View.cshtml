@@ -1,0 +1,18 @@
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+	ViewData["Title"] = "Patient";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using static KnnLibrary.Diagnostic
+@model RestApi.Models.Patient
+
+<p>@Model.FirstName @Model.LastName</p>
+<p>@Model.Birthdate</p>
+<p>@Model.Gender</p>
+<p>@Model.City</p>
+@if (Model.DiagnosticDBs != null && Model.DiagnosticDBs.Count > 0)
+{
+	<p>Dernier diagnostique : @(Model.DiagnosticDBs.Last().Label ? "Présence" : "Absence") de maladie</p>
+}
+
+<a class="button" asp-controller="Diagnostique" asp-action="Index">Retour</a>

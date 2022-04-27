@@ -38,4 +38,13 @@
     <ProjectReference Include="..\RestApi\RestApi.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Reference Include="CsvHelper">
+      <HintPath>..\dll\CsvHelper.dll</HintPath>
+    </Reference>
+    <Reference Include="KnnLibrary">
+      <HintPath>..\dll\KnnLibrary.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 </Project>

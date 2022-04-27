@@ -12,34 +12,26 @@ using RestApi.Models.DTO;
 namespace _8INF957_MS_TP2.Controllers
 {
     [Authorize]
-    public class InformationsController : Controller
+    public class PatientController : Controller
     {
         private TP2Context context;
 
-        public InformationsController(TP2Context tp2Context)
+        public PatientController(TP2Context tp2Context)
         {
             context = tp2Context;
         }
-        
-        [HttpPost]
-        public IActionResult ViewPatient(PatientsList patientsList)
+
+        public IActionResult View(int id)
         {
-            return View("Patients", patientsList.SelectedPatientId);
+            return View(context.Patients.Find(id));
         }
+
         [HttpGet]
         public IActionResult AjoutPatient()
         {
             return View();
         }
-        //ajouter un patient
-        [HttpPost]
-        public IActionResult AjoutPatient(Patient patient)
-        {
-            context.Patients.Add(patient);
-            context.SaveChanges();
-
-            return View(patient);
-        }
+       
         //suprimer un patient
         [HttpDelete]
         public  IActionResult AjoutPatient(int Id)
