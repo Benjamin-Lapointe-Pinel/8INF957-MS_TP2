@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using _8INF957_MS_TP2.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using RestApi;
@@ -10,21 +11,17 @@ namespace _8INF957_MS_TP2.Controllers
     public class ConfigurationIaController : Controller
     {
         private TP2Context context;
+        private ContextHelper contextHelper;
 
         public ConfigurationIaController(TP2Context tp2Context)
         {
             context = tp2Context;
-        }
-
-        private ConfigurationIa GetContextConfigurationIa()
-        {
-            int doctorId = int.Parse(HttpContext.User.Claims.Single(c => c.Type == "DoctorId").Value);
-            return context.Doctors.Include("ConfigurationIa").Single(d => d.Id == doctorId).ConfigurationIa;
+            contextHelper = new(this, tp2Context);
         }
 
         public IActionResult Index()
         {
-            return View(GetContextConfigurationIa());
+            return View(contextHelper.GetConfigurationIa());
         }
 
         [HttpPost]
@@ -43,7 +40,7 @@ namespace _8INF957_MS_TP2.Controllers
 
             try
             {
-                ConfigurationIa configurationIa = GetContextConfigurationIa();
+                ConfigurationIa configurationIa = contextHelper.GetConfigurationIa();
                 configurationIa.K = formConfigurationIa.K;
                 configurationIa.Distance = formConfigurationIa.Distance;
                 context.SaveChanges();

@@ -1,53 +1,49 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@using static RestApi.Models.Person
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @{
-   // @ViewBag.Title="Ajouter un patient";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+	ViewBag.Title = "Ajouter un patient";
+	Layout = "~/Views/Shared/_Layout.cshtml";
 }
 @model RestApi.Models.Patient
-<form style="margin : 60px" class="form" asp-action="Add">
-    <div class="form-group" >
-        <label for="Nom" asp-for="FirstName">Nom</label>
-        <input type="text" asp-for="FirstName" id="Nom" class="form-control" placeholder="Nom"/>
-         <span asp-validation-for="FirstName" class="text-danger" ></span>
-    </div><br />
-      <div class="form-group">
 
-        <label for="Prénom" asp-for="LastName">Prénom</label>
-        <input type="text" asp-for="LastName" id="Prénom" class="form-control" placeholder="Prénom"/>
-         <span asp-validation-for="LastName" class="text-danger" ></span>
-    </div><br />
-    <div class="form-group" >
-
-        <label for="DateNaissance" asp-for="Birthdate">Date Naissance</label>
-        <input type="text" asp-for="Birthdate" id="DateNaissance" class="form-control"  placeholder="Date"/>
-         <span asp-validation-for="Birthdate" class="text-danger" ></span>
-    </div><br />
-    <div>
-
-        <label for="genre" asp-for="Gender">Je suis</label>
-        <input type="radio" asp-for="Gender" name="genre" id="Homme" value="Homme"> Homme
-        <input type="radio" asp-for="Gender" name="genre" id="femme" value="Femme"> femme
-         <span asp-validation-for="Gender" class="text-danger" ></span>
-    </div><br />
-     <div>
-        <label for="Ville" asp-for="City">Ville</label>
-        <select>
-            <option value="Rimouski" asp-for="city">Rimouski</option>
-            <option value="Montreal" asp-for="city">Montreal</option>
-            <span asp-validation-for="City" class="text-danger" ></span>
-        </select>
-    </div>
-    <div>
-        <label for="Dernier_Diagnostique" asp-for="DiagnosticDBs">Dernier diagnostique</label>
-        <input type="text" asp-for="DiagnosticDBs" value="Dernier_Diagnostique" placeholder="Présence/abscence de maladie"/>
-         <span asp-validation-for="DiagnosticDBs" class="text-danger" ></span>
-    </div><br />
-        <div class="mb-3">
-            <button type="submit" value="Ajouter" class="btn btn-secondary" style="background-color :green">Ajouter</button>
-                 
-            <button type="submit" value="Quitter" class="btn btn-secondary" style="background-color :green" >Quitter</button>
-        </div>
+<form class="form col-md-5" asp-controller="Patient" asp-action="Add">
+	<div class="form-group">
+		<label for="Nom" asp-for="FirstName">Nom</label>
+		<input type="text" asp-for="FirstName" id="Nom" class="form-control" placeholder="Nom" />
+		<span asp-validation-for="FirstName" class="text-danger"></span>
+	</div>
+	<div class="form-group">
+		<label for="Prénom" asp-for="LastName">Prénom</label>
+		<input type="text" asp-for="LastName" id="Prénom" class="form-control" placeholder="Prénom" />
+		<span asp-validation-for="LastName" class="text-danger"></span>
+	</div>
+	<div class="form-group">
+		<label for="DateNaissance" asp-for="Birthdate">Date Naissance</label>
+		<input type="text" asp-for="Birthdate" id="DateNaissance" class="form-control" placeholder="Date" />
+		<span asp-validation-for="Birthdate" class="text-danger"></span>
+	</div>
+	<div class="form-group">
+		<label for="genre">Je suis</label>
+		@Html.RadioButtonFor(p => p.Gender, GenderEnum.Man)
+		@Html.Label("Homme")
+		@Html.RadioButtonFor(p => p.Gender, GenderEnum.Woman)
+		@Html.Label("Femme")
+		<br/>
+		<span asp-validation-for="Gender" class="text-danger"></span>
+	</div>
+	<div class="form-group">
+		<label for="Ville" asp-for="City">Ville</label>
+		<select asp-for="City">
+			<option value="Rimouski">Rimouski</option>
+			<option value="Montreal">Montréal</option>
+			<option value="Quebec">Québec</option>
+			<option value="Levis">Lévis</option>
+			<option value="Riviere-du-Loup">Rivière-du-Loup</option>
+		</select>
+	</div>
+	<br/>
+	<div class="form-group">
+		<button type="submit" value="Ajouter" class="btn btn-secondary" style="background-color :green">Ajouter</button>
+		<button type="reset" onclick="location.href='@Url.Action("Index","Diagnostique")';" class="btn btn-secondary" style="background-color :red">Annuler</button>
+	</div>
 </form>

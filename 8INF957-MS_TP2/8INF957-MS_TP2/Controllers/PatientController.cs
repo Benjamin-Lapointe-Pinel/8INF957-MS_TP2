@@ -8,6 +8,7 @@ using System.Data.SqlClient;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
 using RestApi.Models.DTO;
+using _8INF957_MS_TP2.Services;
 
 namespace _8INF957_MS_TP2.Controllers
 {
@@ -15,10 +16,12 @@ namespace _8INF957_MS_TP2.Controllers
     public class PatientController : Controller
     {
         private TP2Context context;
+        private ContextHelper contextHelper;
 
         public PatientController(TP2Context tp2Context)
         {
             context = tp2Context;
+            contextHelper = new(this, tp2Context);
         }
 
         public IActionResult View(int id)
@@ -26,30 +29,18 @@ namespace _8INF957_MS_TP2.Controllers
             return View(context.Patients.Find(id));
         }
 
-        [HttpGet]
-        public IActionResult AjoutPatient()
+        public IActionResult Add()
         {
             return View();
         }
-       
-        //suprimer un patient
-        [HttpDelete]
-        public  IActionResult AjoutPatient(int Id)
-        {
-            Patient patient = context.Patients.Find(Id);
-            context.Patients.Remove(patient);
-            context.SaveChanges();
-            return View(patient);
 
-        }
-        // supprimer un diagnostique  d'un patient
-        public IActionResult AjoutPatient(string Firstname)
+        [HttpPost]
+        public IActionResult Add(Patient patient)
         {
-            Patient patient = context.Patients.Find(Firstname);
-            context.Patients.Remove(patient);
+            patient.DoctorId = contextHelper.GetDoctorId();
+            context.Patients.Add(patient);
             context.SaveChanges();
-            return View(patient);
-
+            return RedirectToAction("Index", "Diagnostique");
         }
     }
 }

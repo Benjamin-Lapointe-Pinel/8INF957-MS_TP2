@@ -1,4 +1,5 @@
 ﻿using System.Security.Claims;
+using _8INF957_MS_TP2.Services;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
@@ -13,16 +14,12 @@ namespace _8INF957_MS_TP2.Controllers
     public class AccountController : Controller
     {
         private TP2Context context;
+        private ContextHelper contextHelper;
 
         public AccountController(TP2Context tp2Context)
         {
             context = tp2Context;
-        }
-
-        private Doctor getContextDoctor()
-        {
-            int doctorId = int.Parse(HttpContext.User.Claims.Single(c => c.Type == "DoctorId").Value);
-            return context.Doctors.Find(doctorId);
+            contextHelper = new(this, tp2Context);
         }
 
         [AllowAnonymous]
@@ -58,7 +55,7 @@ namespace _8INF957_MS_TP2.Controllers
         [HttpGet]
         public IActionResult Informations()
         {
-            Doctor? doctor = getContextDoctor();
+            Doctor? doctor = contextHelper.GetDoctor();
             if (doctor == null)
             {
                 return RedirectToAction("Login");
@@ -71,7 +68,7 @@ namespace _8INF957_MS_TP2.Controllers
         {
             try
             {
-                Doctor? doctor = getContextDoctor();
+                Doctor? doctor = contextHelper.GetDoctor();
                 if (doctor == null)
                 {
                     return RedirectToAction("Login");
