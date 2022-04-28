@@ -1,5 +1,4 @@
 ﻿using System.Diagnostics;
-using _8INF957_MS_TP2.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using RestApi;

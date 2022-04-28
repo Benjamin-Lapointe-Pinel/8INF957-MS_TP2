@@ -1,5 +1,4 @@
-﻿using _8INF957_MS_TP2.Models;
-using _8INF957_MS_TP2.Services;
+﻿using _8INF957_MS_TP2.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using RestApi;
