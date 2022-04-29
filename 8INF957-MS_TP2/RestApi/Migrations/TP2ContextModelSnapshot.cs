@@ -40,7 +40,7 @@ namespace RestApi.Migrations
                     b.HasIndex("DoctorId")
                         .IsUnique();
 
-                    b.ToTable("ConfigurationsIa");
+                    b.ToTable("ConfigurationsIa", (string)null);
                 });
 
             modelBuilder.Entity("RestApi.Models.DiagnosticDB", b =>
@@ -71,7 +71,7 @@ namespace RestApi.Migrations
 
                     b.HasIndex("PatientId");
 
-                    b.ToTable("Diagnostics");
+                    b.ToTable("Diagnostics", (string)null);
                 });
 
             modelBuilder.Entity("RestApi.Models.Doctor", b =>
@@ -115,7 +115,7 @@ namespace RestApi.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Doctors");
+                    b.ToTable("Doctors", (string)null);
 
                     b.HasData(
                         new
@@ -177,7 +177,7 @@ namespace RestApi.Migrations
 
                     b.HasIndex("DoctorId");
 
-                    b.ToTable("Patients");
+                    b.ToTable("Patients", (string)null);
                 });
 
             modelBuilder.Entity("RestApi.Models.ConfigurationIa", b =>

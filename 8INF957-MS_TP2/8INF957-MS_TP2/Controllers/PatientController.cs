@@ -39,7 +39,7 @@ namespace _8INF957_MS_TP2.Controllers
             patient.DoctorId = contextHelper.GetDoctorId();
             context.Patients.Add(patient);
             context.SaveChanges();
-            return RedirectToAction("Index", "Diagnostique");
+            return RedirectToAction("Index", "Diagnostic");
         }
     }
 }

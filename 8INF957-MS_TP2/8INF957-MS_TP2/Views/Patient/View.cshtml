@@ -12,7 +12,7 @@
 <p>@Model.City</p>
 @if (Model.DiagnosticDBs != null && Model.DiagnosticDBs.Count > 0)
 {
-	<p>Dernier diagnostique : @(Model.DiagnosticDBs.Last().Label ? "Présence" : "Absence") de maladie</p>
+	<p>Dernier diagnostique : @(Model.DiagnosticDBs.Last().Target ? "Présence" : "Absence") de maladie</p>
 }
 
-<a class="button" asp-controller="Diagnostique" asp-action="Index">Retour</a>
+<a class="button" asp-controller="Diagnostic" asp-action="Index">Retour</a>

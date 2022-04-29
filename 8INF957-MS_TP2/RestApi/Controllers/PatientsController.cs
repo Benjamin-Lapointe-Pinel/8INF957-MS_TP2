@@ -186,7 +186,7 @@ namespace RestApi
                 string trainingFile = Path.Combine(Directory.GetCurrentDirectory(), "Data_HeartDiseaseDiagnostic", "train.csv");
                 ConfigurationIa configurationIa = tp2Context.ConfigurationsIa.Single(c => c.DoctorId == GetContextDoctorId());
                 knn.Train(trainingFile, configurationIa.K, configurationIa.Distance);
-                diagnostic.Target = knn.Predict(diagnostic);
+                diagnostic.Target = knn.Predict(diagnostic.ToDiagnostic());
 
                 tp2Context.Diagnostics.Add(diagnostic);
                 tp2Context.SaveChanges();

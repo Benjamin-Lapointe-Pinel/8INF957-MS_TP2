@@ -1,0 +1,58 @@
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+	ViewData["Title"] = "Diagnostique";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model _8INF957_MS_TP2.ViewModels.DiagnosticViewModel
+
+<form class="form-horizontal" asp-controller="Diagnostic" asp-action="Diagnose">
+	<input type="hidden" asp-for="Patients" />
+	<div class="form-group">
+		@Html.DropDownListFor(m => m.SelectedPatientId, Model.Patients)
+		<input class="btn btn-secondary" type="submit" value="Informations" asp-controller="Diagnostic" asp-action="ViewPatient" />
+		<input class="btn btn-secondary" type="submit" value="Ajouter un patient" asp-controller="Diagnostic" asp-action="AddPatient" />
+	</div>
+	<fieldset class="border p-2">
+		<legend class="float-none w-auto">Paramètres</legend>
+		<div class="form-group">
+			<label for="cp">Type de douleur thoracique</label>
+			<select id="cp" asp-for="DiagnosticDB.CP">
+				<option value="1">angine typique</option>
+				<option value="2">angine atypique</option>
+				<option value="3">douleur non angineuse</option>
+				<option value="4"> asymptomatique</option>
+			</select>
+			<span asp-validation-for="DiagnosticDB.CP" class="text-danger"></span>
+		</div>
+		<br />
+		<div class="form-group">
+			<label for="thal">Thalassémie</label>
+			<select id="thal" asp-for="DiagnosticDB.Thal">
+				<option value="1">normale</option>
+				<option value="2">défaut corrigé</option>
+				<option value="3">défaut réversible</option>
+			</select>
+			<span asp-validation-for="DiagnosticDB.Thal" class="text-danger"></span>
+		</div>
+		<br />
+		<div class="form-group">
+			<label for="oldpeak">Dépression ST induite par l'exercice par rapport au repos</label>
+			<input id="oldpeak" asp-for="DiagnosticDB.OldPeak" type="number" min="0" max="6.2" step="0.1" value="0" />
+			<span asp-validation-for="DiagnosticDB.OldPeak" class="text-danger"></span>
+		</div>
+		<br />
+		<div class="form-group">
+			<label for="ca">Nombre de gros vaisseaux colorés par fluoroscopie</label>
+			<input id="ca" asp-for="DiagnosticDB.CA" type="number" min="0" max="3" step="1" value="0" />
+			<span asp-validation-for="DiagnosticDB.CA" class="text-danger"></span>
+		</div>
+	</fieldset>
+	<br />
+	<div class="form-group">
+		<button type="submit" class="btn btn-primary">Diagnostiquer</button>
+		@if (ViewBag.Result != null)
+		{
+			<span>@ViewBag.Result</span>
+		}
+	</div>
+</form>
