@@ -71,16 +71,34 @@ namespace TP1_app_BLP.Services
             return JsonConvert.DeserializeObject<Doctor>(data);
         }
 
-        public IEnumerable<Patient> GetPatients()
+        public List<Patient> GetPatients()
         {
             HttpResponseMessage response = client.GetAsync("patients").Result;
             if (!response.IsSuccessStatusCode)
             {
-                return Enumerable.Empty<Patient>();
+                return new List<Patient>();
             }
 
             string data = response.Content.ReadAsStringAsync().Result;
-            return JsonConvert.DeserializeObject<List<Patient>>(data);
+            List<Patient> patients = JsonConvert.DeserializeObject<List<Patient>>(data);
+
+            foreach (Patient patient in patients)
+            {
+                patient.Diagnostics = GetDiagnostics(patient.Id);
+            }
+
+            return patients;
+        }
+
+        public List<Diagnostic> GetDiagnostics(int patientId)
+        {
+            HttpResponseMessage response = client.GetAsync($"patients/{patientId}/diagnostics").Result;
+            if (!response.IsSuccessStatusCode)
+            {
+                return new List<Diagnostic>();
+            }
+            string data = response.Content.ReadAsStringAsync().Result;
+            return JsonConvert.DeserializeObject<List<Diagnostic>>(data);
         }
 
         public Patient? PostPatient(Patient patient)

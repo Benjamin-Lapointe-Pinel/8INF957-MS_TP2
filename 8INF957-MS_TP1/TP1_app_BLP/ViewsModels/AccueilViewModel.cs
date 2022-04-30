@@ -82,7 +82,35 @@ namespace TP1_app_BLP.ViewsModels
                 }
             }
         }
-        public string Greeting => $"Bienvenue Dr. {Doctor}";
+        public new Doctor Doctor
+        {
+            get
+            {
+                return base.Doctor;
+            }
+            set
+            {
+                if (base.Doctor != value)
+                {
+                    base.Doctor = value;
+                    OnPropertyChanged();
+                    Greeting = $"Bienvenue Dr. {Doctor}";
+                }
+            }
+        }
+        public string greeting;
+        public string Greeting
+        {
+            get => greeting;
+            set
+            {
+                if (greeting != value)
+                {
+                    greeting = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
         public ICommand ModifyDoctor { get; private set; }
         public ICommand CancelDoctor { get; private set; }
         public ICommand TrainCommand { get; private set; }
