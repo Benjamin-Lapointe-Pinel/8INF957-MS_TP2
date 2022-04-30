@@ -25,7 +25,7 @@ namespace _8INF957_MS_TP2.Controllers
 
         public IActionResult View(int id)
         {
-            return View(context.Patients.Find(id));
+            return View(context.Patients.Include("DiagnosticDBs").Single(e => e.Id == id));
         }
 
         public IActionResult Add()

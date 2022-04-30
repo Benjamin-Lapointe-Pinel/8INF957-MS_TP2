@@ -30,7 +30,11 @@ namespace _8INF957_MS_TP2.Controllers
         [HttpPost]
         public IActionResult ViewPatient(DiagnosticViewModel diagnosticViewModel)
         {
-            return RedirectToAction("View", "Patient", new { id = diagnosticViewModel.SelectedPatientId });
+            if (diagnosticViewModel.SelectedPatientId != null)
+            {
+                return RedirectToAction("View", "Patient", new { id = diagnosticViewModel.SelectedPatientId });
+            }
+            return RedirectToAction("Index");
         }
 
         [HttpPost]

@@ -17,10 +17,14 @@
 			<option value="euclidean">Euclidienne</option>
 		</select>
 	</div>
-	<br/>
+	<br />
 	<div class="form-group">
 		<button type="submit" class="btn btn-primary">Enregistrer</button>
 		<button type="reset" onclick="location.href='@Url.Action("Index","ConfigurationIa")';" class="btn btn-secondary" style="background-color :red">Annuler</button>
+		@if (ViewBag.AccuracyMessage != null)
+		{
+			<span>@ViewBag.AccuracyMessage</span>
+		}
 	</div>
 	@if (ViewBag.Error != null)
 	{

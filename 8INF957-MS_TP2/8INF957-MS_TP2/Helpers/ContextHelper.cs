@@ -26,10 +26,10 @@ namespace _8INF957_MS_TP2.Services
             return tp2Context.Doctors.Find(GetDoctorId());
         }
 
-        public ConfigurationIa GetConfigurationIa()
+        public ConfigurationIa? GetConfigurationIa()
         {
             int doctorId = GetDoctorId();
-            return tp2Context.Doctors.Include("ConfigurationIa").Single(d => d.Id == doctorId).ConfigurationIa;
+            return tp2Context.ConfigurationsIa.SingleOrDefault(e => e.DoctorId == doctorId);
         }
 
         public List<Patient> getContextPatients()

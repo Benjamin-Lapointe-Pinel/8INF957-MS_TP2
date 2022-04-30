@@ -1,4 +1,5 @@
 ﻿using _8INF957_MS_TP2.Services;
+using KnnLibrary;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -21,7 +22,7 @@ namespace _8INF957_MS_TP2.Controllers
 
         public IActionResult Index()
         {
-            return View(contextHelper.GetConfigurationIa());
+            return View(contextHelper.GetConfigurationIa() ?? new ConfigurationIa());
         }
 
         [HttpPost]
@@ -40,10 +41,20 @@ namespace _8INF957_MS_TP2.Controllers
 
             try
             {
-                ConfigurationIa configurationIa = contextHelper.GetConfigurationIa();
+                ConfigurationIa configurationIa = contextHelper.GetConfigurationIa() ?? formConfigurationIa;
                 configurationIa.K = formConfigurationIa.K;
                 configurationIa.Distance = formConfigurationIa.Distance;
+                configurationIa.DoctorId = contextHelper.GetDoctorId();
+                context.ConfigurationsIa.Update(configurationIa);
                 context.SaveChanges();
+
+                KNN knn = new();
+                string trainingFile = Path.Combine(Directory.GetCurrentDirectory(), "Data_HeartDiseaseDiagnostic", "train.csv");
+                string samplesFile = Path.Combine(Directory.GetCurrentDirectory(), "Data_HeartDiseaseDiagnostic", "samples.csv");
+                knn.Train(trainingFile, configurationIa.K, configurationIa.Distance);
+                knn.Evaluate(samplesFile);
+
+                ViewBag.AccuracyMessage = $"Taux de reconnaissance : {knn.Accuracy} %";
                 return View("Index");
             }
             catch (Exception)
