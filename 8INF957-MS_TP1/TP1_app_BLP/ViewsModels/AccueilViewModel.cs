@@ -173,6 +173,7 @@ namespace TP1_app_BLP.ViewsModels
             {
                 Diagnostic diagnostic = new(SelectedTypesDouleurThoracique, SelectedThalassemie + 1, OldPeak, Fluoroscopie);
                 diagnostic = RestApi.Client.Diagnose(SelectedPatient, diagnostic);
+                SelectedPatient.Diagnostics.Add(diagnostic);
                 if (diagnostic.Target)
                 {
                     DiagnosticMessage = "Résultat : Présence de Maladie";
